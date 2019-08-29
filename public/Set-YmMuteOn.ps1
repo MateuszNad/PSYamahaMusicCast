@@ -21,13 +21,15 @@
     Notes: 
     Changelog:
 #>
-function Start-YmPowerOn {
+function Set-YmMuteOn {
 
     [cmdletbinding()]
-    [Alias('poweron-ym')]
+    [Alias('muteon-ym')]
     param (
         [Parameter(Mandatory, ValueFromPipeline)]
-        [string[]]$DeviceAddress
+        [string[]]$DeviceAddress,
+        [switch]$PassThru
+
     )
     begin {
 
@@ -36,8 +38,10 @@ function Start-YmPowerOn {
         foreach ($Address in $DeviceAddress) {
             try {
 
-                $Response = Invoke-WebRequest -Uri "http://$Address/YamahaExtendedControl/v2/main/setPower?power=on"
-                $Response.Content | ConvertFrom-Json
+                $Response = Invoke-WebRequest -Uri "http://$Address/YamahaExtendedControl/v1/main/setMute?enable=false"
+                if ($PassThru) {
+                    $Response.Content | ConvertFrom-Json | Add-YmResponseCode
+                }
             }
             catch {
 

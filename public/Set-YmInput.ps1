@@ -27,7 +27,8 @@ function Set-YmInput {
     [Alias('input-ym')]
     param (
         [Parameter(Mandatory, ValueFromPipeline)]
-        [string]$DeviceAddress
+        [string]$DeviceAddress,
+        [switch]$PassThru
     )
     DynamicParam {
         # Set the dynamic parameters' name
@@ -70,7 +71,9 @@ function Set-YmInput {
         foreach ($Address in $DeviceAddress) {
             try {
                 $Response = Invoke-WebRequest -Uri "http://$Address/YamahaExtendedControl/v1/main/setInput?input=$Input" 
-                $Response.Content | ConvertFrom-Json
+                if ($PassThru) {
+                    $Response.Content | ConvertFrom-Json | Add-YmResponseCode
+                }            
             }
             catch {
 

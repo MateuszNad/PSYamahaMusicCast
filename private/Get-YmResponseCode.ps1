@@ -1,4 +1,4 @@
-function Get-ResponseCode {
+function Add-YmResponseCode {
     param (
         [Parameter(Mandatory, ValueFromPipeline)]
         $InputObject

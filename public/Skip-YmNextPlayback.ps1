@@ -26,7 +26,8 @@ function Skip-YmNextPlayback {
     [Alias('next-ym')]
     param (
         [Parameter(Mandatory, ValueFromPipeline)]
-        [string[]]$DeviceAddress
+        [string[]]$DeviceAddress,
+        [switch]$PassThru
     )
     begin {
 
@@ -36,7 +37,9 @@ function Skip-YmNextPlayback {
             try {
 
                 $Response = Invoke-WebRequest -Uri "http://$Address/YamahaExtendedControl/v1/netusb/setPlayback?playback=next"
-                $Response.Content | ConvertFrom-Json
+                if ($PassThru) {
+                    $Response.Content | ConvertFrom-Json | Add-YmResponseCode
+                }
             }
             catch {
 

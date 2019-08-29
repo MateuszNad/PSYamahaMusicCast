@@ -41,7 +41,7 @@ function Get-YmTunnerInfo {
                 $Response.Content | ConvertFrom-Json
             }
             catch {
-
+                Write-Warning "xxxx"
             }
         }
     }

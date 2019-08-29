@@ -50,7 +50,7 @@ function Set-YmVolumeDown {
                     Get-YmStatus -DeviceAddress $DeviceAddress | Select-Object volume
                 }
                 else {
-                    Write-Warning "Somethink doin wrong"
+                    $ResponseObj | Add-YmResponseCode
                 }
             }
             catch {

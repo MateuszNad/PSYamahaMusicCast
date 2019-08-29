@@ -35,12 +35,11 @@ function Get-YmStatus {
     process {
         foreach ($Address in $DeviceAddress) {
             try {
-
                 $Response = Invoke-WebRequest -Uri "http://$Address/YamahaExtendedControl/v1/main/getStatus"
-                $Response.Content | ConvertFrom-Json
+                $Response.Content | ConvertFrom-Json | Add-YmResponseCode
             }
             catch {
-
+                Write-Warning "xxxx"
             }
         }
     }

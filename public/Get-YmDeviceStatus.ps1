@@ -1,3 +1,4 @@
+
 <#
 .Synopsis
      krotki_opis
@@ -21,14 +22,12 @@
     Notes: 
     Changelog:
 #>
-function Stop-YmPlayback {
+function Get-YmDeviceStatus {
 
     [cmdletbinding()]
-    [Alias('stop-ym')]
     param (
         [Parameter(Mandatory, ValueFromPipeline)]
-        [string[]]$DeviceAddress,
-        [switch]$PassThru
+        [string[]]$DeviceAddress
     )
     begin {
 
@@ -37,13 +36,11 @@ function Stop-YmPlayback {
         foreach ($Address in $DeviceAddress) {
             try {
 
-                $Response = Invoke-WebRequest -Uri "http://$Address/YamahaExtendedControl/v1/netusb/setPlayback?playback=stop"
-                if ($PassThru) {
-                    $Response.Content | ConvertFrom-Json | Add-YmResponseCode
-                }
+                $Response = Invoke-WebRequest -Uri "http://$Address/YamahaExtendedControl/v1/system/getFuncStatus"
+                $Response.Content | ConvertFrom-Json | Add-YmResponseCode
             }
             catch {
-
+                Write-Warning "xxxx"
             }
         }
     }
@@ -51,3 +48,5 @@ function Stop-YmPlayback {
 
     }
 }
+
+

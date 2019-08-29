@@ -21,16 +21,15 @@
     Notes: 
     Changelog:
 #>
-function Set-YmVolume {
+function Set-YmMuteOff {
 
     [cmdletbinding()]
-    [Alias('volume-ym')]
+    [Alias('muteoff-ym')]
     param (
         [Parameter(Mandatory, ValueFromPipeline)]
         [string[]]$DeviceAddress,
-        [Parameter(Mandatory)]
-        [ValidateRange(0, 100)]
-        [int]$Volume
+        [switch]$PassThru
+
     )
     begin {
 
@@ -38,14 +37,10 @@ function Set-YmVolume {
     process {
         foreach ($Address in $DeviceAddress) {
             try {
-                $Response = Invoke-WebRequest -Uri "http://$Address/YamahaExtendedControl/v1/main/setVolume?volume=$Volume"
-                $ResponseObj = $Response.Content | ConvertFrom-Json
 
-                if ($ResponseObj.response_code -eq 0) {
-                    Get-YmStatus -DeviceAddress $DeviceAddress | Select-Object volume
-                }
-                else {
-                    $ResponseObj | Add-YmResponseCode
+                $Response = Invoke-WebRequest -Uri "http://$Address/YamahaExtendedControl/v1/main/setMute?enable=true"
+                if ($PassThru) {
+                    $Response.Content | ConvertFrom-Json | Add-YmResponseCode
                 }
             }
             catch {
@@ -57,4 +52,5 @@ function Set-YmVolume {
 
     }
 }
+
 

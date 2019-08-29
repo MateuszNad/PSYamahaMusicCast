@@ -1,4 +1,3 @@
-
 <#
 .Synopsis
      krotki_opis
@@ -22,12 +21,15 @@
     Notes: 
     Changelog:
 #>
-function Get-YmFunctionStatus {
+function Set-YmPowerOn {
 
     [cmdletbinding()]
+    [Alias('poweron-ym')]
     param (
         [Parameter(Mandatory, ValueFromPipeline)]
-        [string[]]$DeviceAddress
+        [string[]]$DeviceAddress,
+        [switch]$PassThru
+
     )
     begin {
 
@@ -36,8 +38,10 @@ function Get-YmFunctionStatus {
         foreach ($Address in $DeviceAddress) {
             try {
 
-                $Response = Invoke-WebRequest -Uri "http://$Address/YamahaExtendedControl/v1/system/getFuncStatus"
-                $Response.Content | ConvertFrom-Json
+                $Response = Invoke-WebRequest -Uri "http://$Address/YamahaExtendedControl/v2/main/setPower?power=on"
+                if ($PassThru) {
+                    $Response.Content | ConvertFrom-Json | Add-YmResponseCode
+                }
             }
             catch {
 

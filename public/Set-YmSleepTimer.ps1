@@ -29,7 +29,8 @@ function Set-YmSleepTimer {
         [Parameter(Mandatory, ValueFromPipeline)]
         [string[]]$DeviceAddress,
         [Parameter(Mandatory = $false)]
-        [int]$Minutes = 30
+        [int]$Minutes = 30,
+        [switch]$PassThru
     )
     begin {
 
@@ -39,7 +40,9 @@ function Set-YmSleepTimer {
             try {
 
                 $Response = Invoke-WebRequest -Uri "http://$Address/YamahaExtendedControl/v1/main/setSleep?sleep=$Minutes"
-                $Response.Content | ConvertFrom-Json
+                if ($PassThru) {
+                    $Response.Content | ConvertFrom-Json | Add-YmResponseCode
+                }            
             }
             catch {
 

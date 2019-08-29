@@ -22,7 +22,7 @@
     Notes: 
     Changelog:
 #>
-function Get-YmDeviceInfo {
+function Get-YmDeviceInformation {
 
     [cmdletbinding()]
     param (
@@ -37,10 +37,10 @@ function Get-YmDeviceInfo {
             try {
 
                 $Response = Invoke-WebRequest -Uri "http://$Address/YamahaExtendedControl/v1/system/getDeviceInfo"
-                $Response.Content | ConvertFrom-Json | Get-ResponseCode
+                $Response.Content | ConvertFrom-Json | Add-YmResponseCode
             }
             catch {
-
+                Write-Warning $PSItem
             }
         }
     }

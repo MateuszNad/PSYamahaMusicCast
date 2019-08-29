@@ -29,7 +29,8 @@ function Set-YmVolumeUp {
         [Parameter(Mandatory, ValueFromPipeline)]
         [string[]]$DeviceAddress,
         [Parameter(Mandatory = $false, ParameterSetName = 'InStep')]
-        [int]$InStep
+        [int]$InStep,
+        [switch]$PassThru
     )
     begin {
 
@@ -50,7 +51,7 @@ function Set-YmVolumeUp {
                     Get-YmStatus -DeviceAddress $DeviceAddress | Select-Object volume
                 }
                 else {
-                    Write-Warning "Somethink doin wrong"
+                    $ResponseObj | Add-YmResponseCode
                 }
             }
             catch {

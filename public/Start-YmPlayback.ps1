@@ -27,7 +27,8 @@ function Start-YmPlayback {
     [Alias('play-ym')]
     param (
         [Parameter(Mandatory, ValueFromPipeline)]
-        [string[]]$DeviceAddress
+        [string[]]$DeviceAddress,
+        [switch]$PassThru
     )
     begin {
 
@@ -37,7 +38,9 @@ function Start-YmPlayback {
             try {
 
                 $Response = Invoke-WebRequest -Uri "http://$Address/YamahaExtendedControl/v1/netusb/setPlayback?playback=play"
-                $Response.Content | ConvertFrom-Json
+                if ($PassThru) {
+                    $Response.Content | ConvertFrom-Json | Add-YmResponseCode
+                }
             }
             catch {
 
