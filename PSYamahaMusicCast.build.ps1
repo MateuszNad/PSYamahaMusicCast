@@ -1,22 +1,19 @@
 # Default 
 task . RemoveImport
-# Only Testy
+
 task tests InstallDependencies, Analyze, Test
-# Publish
-task pub InstallDependencies, Analyze, Test, Publish
-# Local Publish
+task publish InstallDependencies, Analyze, Test, Publish
 task version InstallDependencies, Analyze, Test, UpdateVersion
 
 $ModuleName = Split-Path -Path $BuildRoot -Leaf
 
-
 task RemoveImport {
-    if (Get-Module $ModuleName) {
+    if (Get-Module $ModuleName)
+    {
         Remove-Module -Name $ModuleName
     }
     Import-Module $BuildRoot
 }
-
 
 task InstallDependencies {
     #Install-Module Pester -Force
@@ -36,7 +33,8 @@ task Analyze {
     $saResults = Invoke-ScriptAnalyzer @scriptAnalyzerParams
     $saResults | ConvertTo-Html | Out-File -FilePath "$BuildRoot\test\result.$ModuleName.scriptAnalyzer.html" -Force
 
-    if ($saResults) {
+    if ($saResults)
+    {
         $saResults | Format-Table
         throw "One or more PSScriptAnalyzer errors/warnings where found."
     }
@@ -71,7 +69,8 @@ task Publish {
 }
 
 task UpdateVersion {
-    try {
+    try
+    {
         $moduleManifestFile = ((($BuildFile -split '\\')[-1] -split '\.')[0] + '.psd1')
         $manifestContent = Get-Content $moduleManifestFile -Raw
         [version]$version = [regex]::matches($manifestContent, "ModuleVersion\s*=\s*\'(?<version>(\d+\.)?(\d+\.)?(\d+\.)?(\*|\d+))'") | ForEach-Object { $_.groups['version'].value }
@@ -82,10 +81,9 @@ task UpdateVersion {
 
         $manifestContent | Set-Content -Path "$BuildRoot\$moduleManifestFile"
     }
-    catch {
+    catch
+    {
         Write-Error -Message $_.Exception.Message
         $host.SetShouldExit($LastExitCode)
     }
 }
-
-

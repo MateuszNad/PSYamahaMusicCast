@@ -1,0 +1,7 @@
+trigger
+- master
+
+stages:
+  - stage
+
+  - jobs:

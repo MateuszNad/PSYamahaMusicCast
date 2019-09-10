@@ -21,7 +21,8 @@
     Notes: 
     Changelog:
 #>
-function Set-YmVolumeDown {
+function Set-YmVolumeDown
+{
 
     [Alias('down-ym')]
     [cmdletbinding()]
@@ -31,34 +32,44 @@ function Set-YmVolumeDown {
         [Parameter(Mandatory = $false, ParameterSetName = 'InStep')]
         [int]$InStep
     )
-    begin {
+    begin
+    {
 
     }
-    process {
-        foreach ($Address in $DeviceAddress) {
-            try {
-                if ($InStep) {
+    process
+    {
+        foreach ($Address in $DeviceAddress)
+        {
+            try
+            {
+                if ($InStep)
+                {
                     $Response = Invoke-WebRequest -Uri "http://$Address/YamahaExtendedControl/v1/main/setVolume?volume=down&step=$InStep"
                     $ResponseObj = $Response.Content | ConvertFrom-Json
                 }
-                else {
+                else
+                {
                     $Response = Invoke-WebRequest -Uri "http://$Address/YamahaExtendedControl/v1/main/setVolume?volume=down"
                     $ResponseObj = $Response.Content | ConvertFrom-Json
                 }
 
-                if ($ResponseObj.response_code -eq 0) {
+                if ($ResponseObj.response_code -eq 0)
+                {
                     Get-YmStatus -DeviceAddress $DeviceAddress | Select-Object volume
                 }
-                else {
+                else
+                {
                     $ResponseObj | Add-YmResponseCode
                 }
             }
-            catch {
+            catch
+            {
 
             }
         }
     }
-    end {
+    end
+    {
 
     }
 }

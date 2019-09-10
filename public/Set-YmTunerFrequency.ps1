@@ -21,17 +21,19 @@
     Notes:
     Changelog:
 #>
-function Set-YmVolume
+function Set-YmTunerFrequency
 {
 
     [cmdletbinding()]
-    [Alias('volume-ym')]
+    [Alias('set-frequency')]
     param (
         [Parameter(Mandatory, ValueFromPipeline)]
         [string[]]$DeviceAddress,
         [Parameter(Mandatory)]
-        [ValidateRange(0, 100)]
-        [int]$Volume
+        [ValidateRange(87500, 108000)]
+        [int]$Frequency,
+        [ValidateSet('fm', 'am')]
+        [string]$Band = 'fm'
     )
     begin
     {
@@ -43,12 +45,12 @@ function Set-YmVolume
         {
             try
             {
-                $Response = Invoke-WebRequest -Uri "http://$Address/YamahaExtendedControl/v1/main/setVolume?volume=$Volume"
+                $Response = Invoke-WebRequest -Uri "http://$Address/YamahaExtendedControl/v1/tuner/setFreq?band=fm&tuning=direct&num=$Frequency"
                 $ResponseObj = $Response.Content | ConvertFrom-Json
 
                 if ($ResponseObj.response_code -eq 0)
                 {
-                    Get-YmStatus -DeviceAddress $DeviceAddress | Select-Object volume
+                    Get-YmStatus -DeviceAddress $DeviceAddress
                 }
                 else
                 {

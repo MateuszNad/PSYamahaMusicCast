@@ -1,0 +1,38 @@
+{
+    "version": "2.0.0",
+    "windows": {
+        "options": {
+            "shell": {
+                "executable": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+                "args": [
+                    "-NoProfile",
+                    "-ExecutionPolicy",
+                    "Bypass",
+                    "-Command"
+                ]
+            }
+        }
+    },
+    "tasks": [
+        {
+            "label": "publish",
+            "type": "shell",
+            "command": "Invoke-Build -Task publish"
+        },
+        {
+            "label": "test",
+            "type": "shell",
+            "command": "Invoke-Build -Task test"
+        },
+        {
+            "label": "version",
+            "type": "shell",
+            "command": "Invoke-Build -Task version"
+        },
+        {
+            "label": "jira",
+            "type": "shell",
+            "command": "Invoke-Build -Task version"
+        }
+    ]
+}

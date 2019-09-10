@@ -22,32 +22,36 @@
     Notes: 
     Changelog:
 #>
-function Get-YmTunnerInfo {
-
+function Get-YmTunnerInfo
+{
     [cmdletbinding()]
     [Alias('tunner-ym')]
     param (
         [Parameter(Mandatory, ValueFromPipeline)]
         [string[]]$DeviceAddress
     )
-    begin {
+    begin
+    {
 
     }
-    process {
-        foreach ($Address in $DeviceAddress) {
-            try {
+    process
+    {
+        foreach ($Address in $DeviceAddress)
+        {
+            try
+            {
 
                 $Response = Invoke-WebRequest -Uri "http://$Address/YamahaExtendedControl/v1/tuner/getPlayInfo"
                 $Response.Content | ConvertFrom-Json
             }
-            catch {
+            catch
+            {
                 Write-Warning "xxxx"
             }
         }
     }
-    end {
+    end
+    {
 
     }
 }
-
-

@@ -1,3 +1,4 @@
+
 <#
 .Synopsis
      krotki_opis
@@ -21,17 +22,18 @@
     Notes:
     Changelog:
 #>
-function Set-YmVolume
+function Set-YmTunnerStore
 {
 
     [cmdletbinding()]
-    [Alias('volume-ym')]
+    [Alias('muteoff-ym')]
     param (
         [Parameter(Mandatory, ValueFromPipeline)]
         [string[]]$DeviceAddress,
         [Parameter(Mandatory)]
-        [ValidateRange(0, 100)]
-        [int]$Volume
+        [int]$Number,
+        [switch]$PassThru
+
     )
     begin
     {
@@ -43,16 +45,11 @@ function Set-YmVolume
         {
             try
             {
-                $Response = Invoke-WebRequest -Uri "http://$Address/YamahaExtendedControl/v1/main/setVolume?volume=$Volume"
-                $ResponseObj = $Response.Content | ConvertFrom-Json
 
-                if ($ResponseObj.response_code -eq 0)
+                $Response = Invoke-WebRequest -Uri "http://$Address/YamahaExtendedControl/v1/tuner/storePreset?num=$Number"
+                if ($PassThru)
                 {
-                    Get-YmStatus -DeviceAddress $DeviceAddress | Select-Object volume
-                }
-                else
-                {
-                    $ResponseObj | Add-YmResponseCode
+                    $Response.Content | ConvertFrom-Json | Add-YmResponseCode
                 }
             }
             catch

@@ -21,7 +21,8 @@
     Notes: 
     Changelog:
 #>
-function Skip-YmPreviousPlayback {
+function Skip-YmPreviousPlayback
+{
 
     [cmdletbinding()]
     [Alias('previous-ym')]
@@ -30,24 +31,31 @@ function Skip-YmPreviousPlayback {
         [string[]]$DeviceAddress,
         [switch]$PassThru
     )
-    begin {
+    begin
+    {
 
     }
-    process {
-        foreach ($Address in $DeviceAddress) {
-            try {
+    process
+    {
+        foreach ($Address in $DeviceAddress)
+        {
+            try
+            {
 
                 $Response = Invoke-WebRequest -Uri "http://$Address/YamahaExtendedControl/v1/netusb/setPlayback?playback=previous"
-                if ($PassThru) {
+                if ($PassThru)
+                {
                     $Response.Content | ConvertFrom-Json | Add-YmResponseCode
                 }
             }
-            catch {
+            catch
+            {
 
             }
         }
     }
-    end {
+    end
+    {
 
     }
 }

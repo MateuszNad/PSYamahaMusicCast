@@ -22,31 +22,35 @@
     Notes: 
     Changelog:
 #>
-function Get-YmDeviceStatus {
+function Get-YmDeviceStatus
+{
 
     [cmdletbinding()]
     param (
         [Parameter(Mandatory, ValueFromPipeline)]
         [string[]]$DeviceAddress
     )
-    begin {
+    begin
+    {
 
     }
-    process {
-        foreach ($Address in $DeviceAddress) {
-            try {
+    process
+    {
+        foreach ($Address in $DeviceAddress)
+        {
+            try
+            {
 
                 $Response = Invoke-WebRequest -Uri "http://$Address/YamahaExtendedControl/v1/system/getFuncStatus"
                 $Response.Content | ConvertFrom-Json | Add-YmResponseCode
             }
-            catch {
+            catch
+            {
                 Write-Warning "xxxx"
             }
         }
     }
-    end {
-
+    end
+    { 
     }
 }
-
-

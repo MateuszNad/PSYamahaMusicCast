@@ -21,7 +21,8 @@
     Notes: 
     Changelog:
 #>
-function Set-YmMuteOn {
+function Set-YmMuteOn
+{
 
     [cmdletbinding()]
     [Alias('muteon-ym')]
@@ -31,26 +32,31 @@ function Set-YmMuteOn {
         [switch]$PassThru
 
     )
-    begin {
+    begin
+    {
 
     }
-    process {
-        foreach ($Address in $DeviceAddress) {
-            try {
+    process
+    {
+        foreach ($Address in $DeviceAddress)
+        {
+            try
+            {
 
                 $Response = Invoke-WebRequest -Uri "http://$Address/YamahaExtendedControl/v1/main/setMute?enable=false"
-                if ($PassThru) {
+                if ($PassThru)
+                {
                     $Response.Content | ConvertFrom-Json | Add-YmResponseCode
                 }
             }
-            catch {
+            catch
+            {
 
             }
         }
     }
-    end {
+    end
+    {
 
     }
 }
-
-

@@ -21,7 +21,8 @@
     Notes: 
     Changelog:
 #>
-function Disable-YmStandby {
+function Disable-YmStandby
+{
 
     [cmdletbinding()]
     param (
@@ -30,26 +31,31 @@ function Disable-YmStandby {
         [switch]$PassThru
 
     )
-    begin {
+    begin
+    {
 
     }
-    process {
-        foreach ($Address in $DeviceAddress) {
-            try {
+    process
+    {
+        foreach ($Address in $DeviceAddress)
+        {
+            try
+            {
 
                 $Response = Invoke-WebRequest -Uri "http://$Address/YamahaExtendedControl/v1/system/setAutoPowerStandby?enable=false"
-                if ($PassThru) {
+                if ($PassThru)
+                {
                     $Response.Content | ConvertFrom-Json | Add-YmResponseCode
                 }
             }
-            catch {
+            catch
+            {
 
             }
         }
     }
-    end {
+    end
+    {
 
     }
 }
-
-

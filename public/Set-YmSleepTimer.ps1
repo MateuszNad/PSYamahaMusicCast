@@ -21,7 +21,8 @@
     Notes: 
     Changelog:
 #>
-function Set-YmSleepTimer {
+function Set-YmSleepTimer
+{
 
     [cmdletbinding()]
     [Alias('timer-ym')]
@@ -32,30 +33,38 @@ function Set-YmSleepTimer {
         [int]$Minutes = 30,
         [switch]$PassThru
     )
-    begin {
+    begin
+    {
 
     }
-    process {
-        foreach ($Address in $DeviceAddress) {
-            try {
+    process
+    {
+        foreach ($Address in $DeviceAddress)
+        {
+            try
+            {
 
                 $Response = Invoke-WebRequest -Uri "http://$Address/YamahaExtendedControl/v1/main/setSleep?sleep=$Minutes"
-                if ($PassThru) {
+                if ($PassThru)
+                {
                     $Response.Content | ConvertFrom-Json | Add-YmResponseCode
                 }            
             }
-            catch {
+            catch
+            {
 
             }
         }
     }
-    end {
+    end
+    {
 
     }
 }
 
 
-function Get-YmSleepTimer {
+function Get-YmSleepTimer
+{
     <#
     .EXAMPLE
     Get-YmZoneInfo -DeviceAddress 10.10.0.30
@@ -72,7 +81,8 @@ function Get-YmSleepTimer {
     $Status | Select-Object -Property Sleep
 }
 
-function Stop-YmSleepTimer {
+function Stop-YmSleepTimer
+{
     <#
     .EXAMPLE
     Get-YmZoneInfo -DeviceAddress 10.10.0.30

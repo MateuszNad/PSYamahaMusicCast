@@ -21,7 +21,8 @@
     Notes: 
     Changelog:
 #>
-function Set-YmVolumeUp {
+function Set-YmVolumeUp
+{
 
     [cmdletbinding()]
     [Alias('up-ym')]
@@ -32,34 +33,44 @@ function Set-YmVolumeUp {
         [int]$InStep,
         [switch]$PassThru
     )
-    begin {
+    begin
+    {
 
     }
-    process {
-        foreach ($Address in $DeviceAddress) {
-            try {
-                if ($InStep) {
+    process
+    {
+        foreach ($Address in $DeviceAddress)
+        {
+            try
+            {
+                if ($InStep)
+                {
                     $Response = Invoke-WebRequest -Uri "http://$Address/YamahaExtendedControl/v1/main/setVolume?volume=up&step=$InStep"
                     $ResponseObj = $Response.Content | ConvertFrom-Json
                 }
-                else {
+                else
+                {
                     $Response = Invoke-WebRequest -Uri "http://$Address/YamahaExtendedControl/v1/main/setVolume?volume=up"
                     $ResponseObj = $Response.Content | ConvertFrom-Json
                 }
                 
-                if ($ResponseObj.response_code -eq 0) {
+                if ($ResponseObj.response_code -eq 0)
+                {
                     Get-YmStatus -DeviceAddress $DeviceAddress | Select-Object volume
                 }
-                else {
+                else
+                {
                     $ResponseObj | Add-YmResponseCode
                 }
             }
-            catch {
+            catch
+            {
 
             }
         }
     }
-    end {
+    end
+    {
 
     }
 }

@@ -21,7 +21,8 @@
     Notes: 
     Changelog:
 #>
-function Start-YmPlayback {
+function Start-YmPlayback
+{
 
     [cmdletbinding()]
     [Alias('play-ym')]
@@ -30,24 +31,31 @@ function Start-YmPlayback {
         [string[]]$DeviceAddress,
         [switch]$PassThru
     )
-    begin {
+    begin
+    {
 
     }
-    process {
-        foreach ($Address in $DeviceAddress) {
-            try {
+    process
+    {
+        foreach ($Address in $DeviceAddress)
+        {
+            try
+            {
 
                 $Response = Invoke-WebRequest -Uri "http://$Address/YamahaExtendedControl/v1/netusb/setPlayback?playback=play"
-                if ($PassThru) {
+                if ($PassThru)
+                {
                     $Response.Content | ConvertFrom-Json | Add-YmResponseCode
                 }
             }
-            catch {
+            catch
+            {
 
             }
         }
     }
-    end {
+    end
+    {
 
     }
 }

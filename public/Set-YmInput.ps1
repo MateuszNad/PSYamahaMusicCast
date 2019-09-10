@@ -21,7 +21,8 @@
     Notes: 
     Changelog:
 #>
-function Set-YmInput {
+function Set-YmInput
+{
 
     [cmdletbinding()]
     [Alias('input-ym')]
@@ -30,7 +31,8 @@ function Set-YmInput {
         [string]$DeviceAddress,
         [switch]$PassThru
     )
-    DynamicParam {
+    DynamicParam
+    {
         # Set the dynamic parameters' name
         $ParameterName = 'Input'
             
@@ -62,25 +64,32 @@ function Set-YmInput {
         
     }
 
-    begin {
+    begin
+    {
         
     }
-    process {
+    process
+    {
         $Input = $PSBoundParameters[$ParameterName]
 
-        foreach ($Address in $DeviceAddress) {
-            try {
+        foreach ($Address in $DeviceAddress)
+        {
+            try
+            {
                 $Response = Invoke-WebRequest -Uri "http://$Address/YamahaExtendedControl/v1/main/setInput?input=$Input" 
-                if ($PassThru) {
+                if ($PassThru)
+                {
                     $Response.Content | ConvertFrom-Json | Add-YmResponseCode
                 }            
             }
-            catch {
+            catch
+            {
 
             }
         }
     }
-    end {
+    end
+    {
 
     }
 }
