@@ -1,24 +1,24 @@
 <#
 .Synopsis
-     krotki_opis
-    
+    The function volumes down.
+
 .DESCRIPTION
-    dlugi_opis
-    
+    The function volumes down.
+
 .EXAMPLE
-    przyklad_1
-    
+    Set-YmVolumeDown -DeviceAddress 10.10.0.30
+
 .EXAMPLE
-    przyklad_2
-    
+    down-ym -DeviceAddress 10.10.0.30
+
 .LINK
-    Author: autor 
+    Author: autor
     Link: akademiapowershell.pl
-    
+
     Date: 26-08-2019
     Version: version
     eywords: keywords
-    Notes: 
+    Notes:
     Changelog:
 #>
 function Set-YmVolumeDown

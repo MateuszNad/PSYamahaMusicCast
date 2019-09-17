@@ -1,25 +1,26 @@
 
 <#
 .Synopsis
-     krotki_opis
-    
+     The function returns basic informations about device
+
 .DESCRIPTION
-    dlugi_opis
-    
+    The function returns basic informations about device.
+    For instance model, system version, device id.
+
 .EXAMPLE
     przyklad_1
-    
+
 .EXAMPLE
     przyklad_2
-    
+
 .LINK
-    Author: autor 
+    Author: autor
     Link: akademiapowershell.pl
-    
+
     Date: 26-08-2019
     Version: version
     eywords: keywords
-    Notes: 
+    Notes:
     Changelog:
 #>
 function Get-YmDeviceInformation
@@ -40,7 +41,6 @@ function Get-YmDeviceInformation
         {
             try
             {
-
                 $Response = Invoke-WebRequest -Uri "http://$Address/YamahaExtendedControl/v1/system/getDeviceInfo"
                 $Response.Content | ConvertFrom-Json | Add-YmResponseCode
             }

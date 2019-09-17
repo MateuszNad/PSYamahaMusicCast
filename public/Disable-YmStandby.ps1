@@ -1,24 +1,25 @@
 <#
 .Synopsis
-     krotki_opis
-    
+    The function disable standby on the device
+
 .DESCRIPTION
-    dlugi_opis
-    
+    The function disable standby on the device
+
 .EXAMPLE
-    przyklad_1
-    
+    Disable-YmStandby -DevicesAddress '10.10.0.1'
+
+    The function
 .EXAMPLE
     przyklad_2
-    
+
 .LINK
-    Author: autor 
+    Author: autor
     Link: akademiapowershell.pl
-    
+
     Date: 26-08-2019
     Version: version
     eywords: keywords
-    Notes: 
+    Notes:
     Changelog:
 #>
 function Disable-YmStandby
@@ -41,7 +42,6 @@ function Disable-YmStandby
         {
             try
             {
-
                 $Response = Invoke-WebRequest -Uri "http://$Address/YamahaExtendedControl/v1/system/setAutoPowerStandby?enable=false"
                 if ($PassThru)
                 {

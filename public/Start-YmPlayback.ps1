@@ -1,24 +1,37 @@
 <#
 .Synopsis
-     krotki_opis
-    
+     The function start a playback.
+
 .DESCRIPTION
-    dlugi_opis
-    
+    The function start a playback
+
 .EXAMPLE
-    przyklad_1
-    
+    Start-YmPlayback -DeviceAddress 10.10.0.30
+
+    Default the function doesn't return object, it only start a playback.
+
 .EXAMPLE
-    przyklad_2
-    
+    play-ym -DeviceAddress 10.10.0.30
+
+    Default the function doesn't return object, it only start a playback.
+
+.EXAMPLE
+    Start-YmPlayback -DeviceAddress 10.10.0.30 -PassThru
+
+    response_code responde_message
+    ------------- ----------------
+                0 Successful request
+
+    The function with the parameter -PassThru returns information about result.
+
 .LINK
-    Author: autor 
+    Author: autor
     Link: akademiapowershell.pl
-    
+
     Date: 26-08-2019
     Version: version
     eywords: keywords
-    Notes: 
+    Notes:
     Changelog:
 #>
 function Start-YmPlayback

@@ -1,24 +1,24 @@
 <#
 .Synopsis
-     krotki_opis
-    
+    The function volumes up.
+
 .DESCRIPTION
-    dlugi_opis
-    
+    The function volumes up.
+
 .EXAMPLE
-    przyklad_1
-    
+    Set-YmVolumeUp -DeviceAddress 10.10.0.30
+
 .EXAMPLE
-    przyklad_2
-    
+    up-ym -DeviceAddress 10.10.0.30
+
 .LINK
-    Author: autor 
+    Author: autor
     Link: akademiapowershell.pl
-    
+
     Date: 26-08-2019
     Version: version
     eywords: keywords
-    Notes: 
+    Notes:
     Changelog:
 #>
 function Set-YmVolumeUp
@@ -53,7 +53,7 @@ function Set-YmVolumeUp
                     $Response = Invoke-WebRequest -Uri "http://$Address/YamahaExtendedControl/v1/main/setVolume?volume=up"
                     $ResponseObj = $Response.Content | ConvertFrom-Json
                 }
-                
+
                 if ($ResponseObj.response_code -eq 0)
                 {
                     Get-YmStatus -DeviceAddress $DeviceAddress | Select-Object volume
@@ -74,7 +74,3 @@ function Set-YmVolumeUp
 
     }
 }
-
-
-
-

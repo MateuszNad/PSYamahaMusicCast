@@ -1,25 +1,25 @@
 
 <#
 .Synopsis
-     krotki_opis
-    
+     The function enable standby on the device
+
 .DESCRIPTION
-    dlugi_opis
-    
+    The function enable standby on the device
+
 .EXAMPLE
-    przyklad_1
-    
+    Enable-YmStandby -DeviceAddress '10.10.0.1'
+
 .EXAMPLE
     przyklad_2
-    
+
 .LINK
-    Author: autor 
+    Author: autor
     Link: akademiapowershell.pl
-    
+
     Date: 26-08-2019
     Version: version
-    eywords: keywords
-    Notes: 
+    Keywords: keywords
+    Notes:
     Changelog:
 #>
 function Enable-YmStandby

@@ -1,15 +1,15 @@
 <#
 .Synopsis
-     krotki_opis
+    The function sets volume.
 
 .DESCRIPTION
-    dlugi_opis
+    The function sets volume.
 
 .EXAMPLE
-    przyklad_1
+    Set-YmVolume -DeviceAddress 10.10.0.30
 
 .EXAMPLE
-    przyklad_2
+    volume-ym -DeviceAddress 10.10.0.30
 
 .LINK
     Author: autor

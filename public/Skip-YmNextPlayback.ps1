@@ -1,24 +1,37 @@
 <#
 .Synopsis
-     krotki_opis
-    
+    The function go to next a track.
+
 .DESCRIPTION
-    dlugi_opis
-    
+    The function go to next a track.
+
 .EXAMPLE
-    przyklad_1
-    
+    Skip-YmNextPlayback -DeviceAddress 10.10.0.30
+
+    Default the function doesn't return object, it only next track.
+
 .EXAMPLE
-    przyklad_2
-    
+    next-ym -DeviceAddress 10.10.0.30
+
+    Default the function doesn't return object, it only next track.
+
+.EXAMPLE
+    Skip-YmNextPlayback -DeviceAddress 10.10.0.30 -PassThru
+
+    response_code responde_message
+    ------------- ----------------
+                0 Successful request
+
+    The function with the parameter -PassThru returns information about result.
+
 .LINK
-    Author: autor 
+    Author: autor
     Link: akademiapowershell.pl
-    
+
     Date: 26-08-2019
     Version: version
     eywords: keywords
-    Notes: 
+    Notes:
     Changelog:
 #>
 function Skip-YmNextPlayback
