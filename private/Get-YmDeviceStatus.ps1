@@ -1,10 +1,10 @@
 
 <#
 .Synopsis
-     krotki_opis
+
 
 .DESCRIPTION
-    dlugi_opis
+
 
 .EXAMPLE
     przyklad_1
@@ -24,7 +24,6 @@
 #>
 function Get-YmDeviceStatus
 {
-
     [cmdletbinding()]
     param (
         [Parameter(Mandatory, ValueFromPipeline)]
@@ -46,7 +45,7 @@ function Get-YmDeviceStatus
             }
             catch
             {
-                Write-Warning "xxxx"
+                Write-Warning $PSItem
             }
         }
     }

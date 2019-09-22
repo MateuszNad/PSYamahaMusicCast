@@ -1,17 +1,16 @@
 
-
 <#
 .Synopsis
-     krotki_opis
+    The function saves a present settings tuner frequency
 
 .DESCRIPTION
-    dlugi_opis
+    The function saves a present settings tuner frequency
 
 .EXAMPLE
-    przyklad_1
+    Set-YmTunerStore -$DeviceAddress 10.10.0.30 -Number 2
 
 .EXAMPLE
-    przyklad_2
+    Set-YmTunerStore -$DeviceAddress 10.10.0.30 -Number 2 -PassThru
 
 .LINK
     Author: autor
@@ -19,18 +18,19 @@
 
     Date: 26-08-2019
     Version: version
-    eywords: keywords
+    Keywords: keywords
     Notes:
     Changelog:
 #>
-function Set-YmTunerPrevious
+function Set-YmTunerStore
 {
-
     [cmdletbinding()]
-    [Alias('previous-tuner')]
+    [Alias()]
     param (
         [Parameter(Mandatory, ValueFromPipeline)]
         [string[]]$DeviceAddress,
+        [Parameter(Mandatory)]
+        [int]$Number,
         [switch]$PassThru
 
     )
@@ -45,7 +45,7 @@ function Set-YmTunerPrevious
             try
             {
 
-                $Response = Invoke-WebRequest -Uri "http://$Address/YamahaExtendedControl/v1/tuner/switchPreset?dir=previous"
+                $Response = Invoke-WebRequest -Uri "http://$Address/YamahaExtendedControl/v1/tuner/storePreset?num=$Number"
                 if ($PassThru)
                 {
                     $Response.Content | ConvertFrom-Json | Add-YmResponseCode

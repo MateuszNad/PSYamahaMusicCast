@@ -1,16 +1,20 @@
 
+
 <#
 .Synopsis
-     krotki_opis
+    The function skips to previous a stored tuner frequency
 
 .DESCRIPTION
-    dlugi_opis
+    The function skips to previous a stored tuner frequency
 
 .EXAMPLE
-    przyklad_1
+    Set-YmTunerPrevious -DeviceAddress 10.10.0.30
 
 .EXAMPLE
-    przyklad_2
+    Set-YmTunerPrevious -DeviceAddress 10.10.0.30 -PassThru
+
+.EXAMPLE
+    tuner-previous -DeviceAddress 10.10.0.30
 
 .LINK
     Author: autor
@@ -18,20 +22,17 @@
 
     Date: 26-08-2019
     Version: version
-    eywords: keywords
+    Keywords: keywords
     Notes:
     Changelog:
 #>
-function Set-YmTunnerStore
+function Set-YmTunerPrevious
 {
-
     [cmdletbinding()]
-    [Alias('muteoff-ym')]
+    [Alias('tuner-previous')]
     param (
         [Parameter(Mandatory, ValueFromPipeline)]
         [string[]]$DeviceAddress,
-        [Parameter(Mandatory)]
-        [int]$Number,
         [switch]$PassThru
 
     )
@@ -46,7 +47,7 @@ function Set-YmTunnerStore
             try
             {
 
-                $Response = Invoke-WebRequest -Uri "http://$Address/YamahaExtendedControl/v1/tuner/storePreset?num=$Number"
+                $Response = Invoke-WebRequest -Uri "http://$Address/YamahaExtendedControl/v1/tuner/switchPreset?dir=previous"
                 if ($PassThru)
                 {
                     $Response.Content | ConvertFrom-Json | Add-YmResponseCode

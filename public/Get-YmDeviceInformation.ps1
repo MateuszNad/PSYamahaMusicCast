@@ -1,11 +1,10 @@
 
 <#
 .Synopsis
-     The function returns basic informations about device
+     The function returns basic information about device
 
 .DESCRIPTION
-    The function returns basic informations about device.
-    For instance model, system version, device id.
+    The function returns basic information about device, for instance model, system version, device id.
 
 .EXAMPLE
     przyklad_1
@@ -19,7 +18,7 @@
 
     Date: 26-08-2019
     Version: version
-    eywords: keywords
+    Keywords: keywords
     Notes:
     Changelog:
 #>

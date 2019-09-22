@@ -1,31 +1,43 @@
 <#
 .Synopsis
-     krotki_opis
-    
+    The function returns current status the device.
+
 .DESCRIPTION
-    dlugi_opis
-    
+    The function returns current status the device.
+
 .EXAMPLE
-    przyklad_1
-    
+    Get-YmStatus  -DeviceAddress 10.10.0.30
+
+    response_code       : 0
+    power               : on
+    sleep               : 0
+    volume              : 22
+    mute                : False
+    max_volume          : 63
+    input               : tuner
+    distribution_enable : True
+    link_control        : standard
+    link_audio_quality  : compressed
+    disable_flags       : 0
+    responde_message    : Successful request
+
 .EXAMPLE
-    przyklad_2
-    
+    status-ym -DeviceAddress 10.10.0.30
+
 .LINK
-    Author: autor 
+    Author: autor
     Link: akademiapowershell.pl
-    
+
     Date: 26-08-2019
     Version: version
-    eywords: keywords
-    Notes: 
+    Keywords: keywords
+    Notes:
     Changelog:
 #>
 function Get-YmStatus
 {
-
     [cmdletbinding()]
-    [Alias('ystatus-ym')]
+    [Alias('status-ym')]
     param (
         [Parameter(Mandatory, ValueFromPipeline)]
         [string[]]$DeviceAddress

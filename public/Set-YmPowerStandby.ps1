@@ -1,31 +1,40 @@
 <#
 .Synopsis
-     krotki_opis
-    
+    The function switches the device on standby.
+
 .DESCRIPTION
-    dlugi_opis
-    
+    The function switches the device on standby.
+
 .EXAMPLE
-    przyklad_1
-    
+    Set-YmPowerStandby -DeviceAddress 10.10.0.30 -PassThru
+
 .EXAMPLE
-    przyklad_2
-    
+    Set-YmPowerStandby -DeviceAddress 10.10.0.30 -PassThru
+
+    response_code responde_message
+    ------------- ----------------
+                0 Successful request
+
+.EXAMPLE
+    standby-ym -DeviceAddress 10.10.0.30
+
+.EXAMPLE
+    poweroff-ym -DeviceAddress 10.10.0.30
+
 .LINK
-    Author: autor 
+    Author: autor
     Link: akademiapowershell.pl
-    
+
     Date: 26-08-2019
     Version: version
-    eywords: keywords
-    Notes: 
+    Keywords: keywords
+    Notes:
     Changelog:
 #>
 function Set-YmPowerStandby
 {
-
     [cmdletbinding()]
-    [Alias('standby-ym')]
+    [Alias('standby-ym', 'Set-YmPowerOff', 'poweroff-ym')]
     param (
         [Parameter(Mandatory, ValueFromPipeline)]
         [string[]]$DeviceAddress,

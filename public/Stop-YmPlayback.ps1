@@ -36,7 +36,6 @@
 #>
 function Stop-YmPlayback
 {
-
     [cmdletbinding()]
     [Alias('stop-ym')]
     param (

@@ -1,24 +1,30 @@
 <#
 .Synopsis
-     krotki_opis
-    
+    The function powers on the device.
+
 .DESCRIPTION
-    dlugi_opis
-    
+    The function powers on the device.
+
 .EXAMPLE
-    przyklad_1
-    
+    Set-YmPowerOn -DeviceAddress 10.10.0.30
+
 .EXAMPLE
-    przyklad_2
-    
+    Set-YmPowerOn -DeviceAddress 10.10.0.30
+
+    response_code responde_message
+    ------------- ----------------
+                0 Successful request
+.EXAMPLE
+    poweron-ym  -DeviceAddress 10.10.0.30
+
 .LINK
-    Author: autor 
+    Author: autor
     Link: akademiapowershell.pl
-    
+
     Date: 26-08-2019
     Version: version
-    eywords: keywords
-    Notes: 
+    Keywords: keywords
+    Notes:
     Changelog:
 #>
 function Set-YmPowerOn

@@ -2,16 +2,19 @@
 
 <#
 .Synopsis
-     krotki_opis
+    The function skips to next a stored tuner frequency.
 
 .DESCRIPTION
-    dlugi_opis
+    The function skips to next a stored tuner frequency.
 
 .EXAMPLE
-    przyklad_1
+    Set-YmTunerNext -DeviceAddress 10.10.0.30
 
 .EXAMPLE
-    przyklad_2
+    Set-YmTunerNext -DeviceAddress 10.10.0.30 -PassThru
+
+.EXAMPLE
+    tuner-next -DeviceAddress 10.10.0.30
 
 .LINK
     Author: autor
@@ -19,7 +22,7 @@
 
     Date: 26-08-2019
     Version: version
-    eywords: keywords
+    Keywords: keywords
     Notes:
     Changelog:
 #>
@@ -27,7 +30,7 @@ function Set-YmTunerNext
 {
 
     [cmdletbinding()]
-    [Alias('next-tuner')]
+    [Alias('tuner-next')]
     param (
         [Parameter(Mandatory, ValueFromPipeline)]
         [string[]]$DeviceAddress,

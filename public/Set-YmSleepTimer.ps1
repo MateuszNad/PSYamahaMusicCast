@@ -1,24 +1,38 @@
 <#
 .Synopsis
-     krotki_opis
-    
+    The function sets sleep timer.
+
 .DESCRIPTION
-    dlugi_opis
-    
+    The function sets sleep timer. Default time is 30 minutes
+
 .EXAMPLE
-    przyklad_1
-    
+    Set-YmSleepTimer -DeviceAddress 10.10.0.30
+
+    The function set sleep timer on 30 minutes.
+
 .EXAMPLE
-    przyklad_2
-    
+    timer-ym -DeviceAddress 10.10.0.30
+
+    The function set sleep timer on 30 minutes.
+
+.EXAMPLE
+    Set-YmSleepTimer -DeviceAddress 10.10.0.30 -Minutes 120
+
+    The function set sleep timer on 2 hours. The devices after this time, it will power off.
+
+.EXAMPLE
+    Set-YmSleepTimer -DeviceAddress 10.10.0.30 -Minutes 0
+
+    Deactivating the sleep timer.
+
 .LINK
-    Author: autor 
+    Author: autor
     Link: akademiapowershell.pl
-    
+
     Date: 26-08-2019
     Version: version
-    eywords: keywords
-    Notes: 
+    Keywords: keywords
+    Notes:
     Changelog:
 #>
 function Set-YmSleepTimer
@@ -30,7 +44,7 @@ function Set-YmSleepTimer
         [Parameter(Mandatory, ValueFromPipeline)]
         [string[]]$DeviceAddress,
         [Parameter(Mandatory = $false)]
-        [int]$Minutes = 30,
+        [int]$Minute = 30,
         [switch]$PassThru
     )
     begin
@@ -48,7 +62,7 @@ function Set-YmSleepTimer
                 if ($PassThru)
                 {
                     $Response.Content | ConvertFrom-Json | Add-YmResponseCode
-                }            
+                }
             }
             catch
             {
@@ -60,39 +74,4 @@ function Set-YmSleepTimer
     {
 
     }
-}
-
-
-function Get-YmSleepTimer
-{
-    <#
-    .EXAMPLE
-    Get-YmZoneInfo -DeviceAddress 10.10.0.30
-
-    .EXAMPLE
-#>
-    [cmdletbinding()]
-    param (
-        [Parameter(Mandatory, ValueFromPipeline)]
-        [string[]]$DeviceAddress
-    )
-    
-    $Status = Get-YmStatus -DeviceAddress $DeviceAddress
-    $Status | Select-Object -Property Sleep
-}
-
-function Stop-YmSleepTimer
-{
-    <#
-    .EXAMPLE
-    Get-YmZoneInfo -DeviceAddress 10.10.0.30
-
-    .EXAMPLE
-#>
-    [cmdletbinding()]
-    param (
-        [Parameter(Mandatory, ValueFromPipeline)]
-        [string[]]$DeviceAddress
-    )
-    Set-YmSleepTimer -DeviceAddress $DeviceAddress -Minutes 0
 }

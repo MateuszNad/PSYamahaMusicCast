@@ -8,13 +8,13 @@
 .EXAMPLE
     Set-YmMuteOn -DeviceAddress 10.10.0.30
 
-
 .EXAMPLE
     Set-YmMuteOn -DeviceAddress 10.10.0.30 -PassThru
 
     response_code responde_message
     ------------- ----------------
                 0 Successful request
+
 .EXAMPLE
     muteon-ym -DeviceAddress 10.10.0.30
 
@@ -30,7 +30,6 @@
 #>
 function Set-YmMuteOn
 {
-
     [cmdletbinding()]
     [Alias('muteon-ym')]
     param (

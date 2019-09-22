@@ -77,7 +77,7 @@
         'Get-YmNetworkStatus',
         'Get-YmSoundProgram',
         'Get-YmStatus',
-        'Get-YmTunnerInfo',
+        'Get-YmTunerInfo',
         'Set-YmInput',
         'Set-YmSleepTimer',
         'Set-YmVolume',
@@ -91,7 +91,10 @@
         'Set-YmPowerStandby',
         'Set-YmMuteOff',
         'Set-YmMuteOn',
-        'Skip-YmTunnerNext'
+        'Skip-YmTunerNext',
+        'Get-YmSleepTimer',
+        'Stop-YmSleepTimer',
+        'Get-YmStatus'
     )
 
     # Cmdlets to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no cmdlets to export.
