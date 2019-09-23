@@ -23,7 +23,7 @@
 #>
 function Set-YmVolume
 {
-    [cmdletbinding()]
+    [cmdletbinding(SupportsShouldProcess)]
     [Alias('volume-ym')]
     param (
         [Parameter(Mandatory, ValueFromPipeline)]
@@ -38,25 +38,28 @@ function Set-YmVolume
     }
     process
     {
-        foreach ($Address in $DeviceAddress)
+        if ($PSCmdlet.ShouldProcess())
         {
-            try
+            foreach ($Address in $DeviceAddress)
             {
-                $Response = Invoke-WebRequest -Uri "http://$Address/YamahaExtendedControl/v1/main/setVolume?volume=$Volume"
-                $ResponseObj = $Response.Content | ConvertFrom-Json
-
-                if ($ResponseObj.response_code -eq 0)
+                try
                 {
-                    Get-YmStatus -DeviceAddress $DeviceAddress | Select-Object volume
-                }
-                else
-                {
-                    $ResponseObj | Add-YmResponseCode
-                }
-            }
-            catch
-            {
+                    $Response = Invoke-WebRequest -Uri "http://$Address/YamahaExtendedControl/v1/main/setVolume?volume=$Volume"
+                    $ResponseObj = $Response.Content | ConvertFrom-Json
 
+                    if ($ResponseObj.response_code -eq 0)
+                    {
+                        Get-YmStatus -DeviceAddress $DeviceAddress | Select-Object volume
+                    }
+                    else
+                    {
+                        $ResponseObj | Add-YmResponseCode
+                    }
+                }
+                catch
+                {
+                    Write-Warning $PSItem
+                }
             }
         }
     }

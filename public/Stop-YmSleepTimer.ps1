@@ -20,10 +20,13 @@
 #>
 function Stop-YmSleepTimer
 {
-    [cmdletbinding()]
+    [cmdletbinding(SupportsShouldProcess)]
     param (
         [Parameter(Mandatory, ValueFromPipeline)]
         [string[]]$DeviceAddress
     )
-    Set-YmSleepTimer -DeviceAddress $DeviceAddress -Minutes 0
+    if ($PSCmdlet.ShouldProcess())
+    {
+        Set-YmSleepTimer -DeviceAddress $DeviceAddress -Minutes 0
+    }
 }

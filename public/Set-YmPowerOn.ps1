@@ -30,7 +30,7 @@
 function Set-YmPowerOn
 {
 
-    [cmdletbinding()]
+    [cmdletbinding(SupportsShouldProcess)]
     [Alias('poweron-ym')]
     param (
         [Parameter(Mandatory, ValueFromPipeline)]
@@ -44,20 +44,22 @@ function Set-YmPowerOn
     }
     process
     {
-        foreach ($Address in $DeviceAddress)
+        if ($PSCmdlet.ShouldProcess())
         {
-            try
+            foreach ($Address in $DeviceAddress)
             {
-
-                $Response = Invoke-WebRequest -Uri "http://$Address/YamahaExtendedControl/v2/main/setPower?power=on"
-                if ($PassThru)
+                try
                 {
-                    $Response.Content | ConvertFrom-Json | Add-YmResponseCode
+                    $Response = Invoke-WebRequest -Uri "http://$Address/YamahaExtendedControl/v2/main/setPower?power=on"
+                    if ($PassThru)
+                    {
+                        $Response.Content | ConvertFrom-Json | Add-YmResponseCode
+                    }
                 }
-            }
-            catch
-            {
-
+                catch
+                {
+                    Write-Warning $PSItem
+                }
             }
         }
     }

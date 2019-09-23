@@ -50,7 +50,7 @@ function Disable-YmStandby
             }
             catch
             {
-
+                Write-Warning $PSItem
             }
         }
     }

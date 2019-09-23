@@ -62,7 +62,7 @@ function Skip-YmNextPlayback
             }
             catch
             {
-
+                Write-Warning $PSItem
             }
         }
     }

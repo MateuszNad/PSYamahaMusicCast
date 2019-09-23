@@ -28,7 +28,7 @@
 #>
 function Set-YmTunerPrevious
 {
-    [cmdletbinding()]
+    [cmdletbinding(SupportsShouldProcess)]
     [Alias('tuner-previous')]
     param (
         [Parameter(Mandatory, ValueFromPipeline)]
@@ -42,20 +42,23 @@ function Set-YmTunerPrevious
     }
     process
     {
-        foreach ($Address in $DeviceAddress)
+        if ($PSCmdlet.ShouldProcess())
         {
-            try
+            foreach ($Address in $DeviceAddress)
             {
-
-                $Response = Invoke-WebRequest -Uri "http://$Address/YamahaExtendedControl/v1/tuner/switchPreset?dir=previous"
-                if ($PassThru)
+                try
                 {
-                    $Response.Content | ConvertFrom-Json | Add-YmResponseCode
-                }
-            }
-            catch
-            {
 
+                    $Response = Invoke-WebRequest -Uri "http://$Address/YamahaExtendedControl/v1/tuner/switchPreset?dir=previous"
+                    if ($PassThru)
+                    {
+                        $Response.Content | ConvertFrom-Json | Add-YmResponseCode
+                    }
+                }
+                catch
+                {
+                    Write-Warning $PSItem
+                }
             }
         }
     }

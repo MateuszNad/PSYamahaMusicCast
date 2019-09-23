@@ -24,7 +24,7 @@
 #>
 function Set-YmTunerStore
 {
-    [cmdletbinding()]
+    [cmdletbinding(SupportsShouldProcess)]
     [Alias()]
     param (
         [Parameter(Mandatory, ValueFromPipeline)]
@@ -40,20 +40,24 @@ function Set-YmTunerStore
     }
     process
     {
-        foreach ($Address in $DeviceAddress)
+        if ($PSCmdlet.ShouldProcess())
         {
-            try
-            {
 
-                $Response = Invoke-WebRequest -Uri "http://$Address/YamahaExtendedControl/v1/tuner/storePreset?num=$Number"
-                if ($PassThru)
+            foreach ($Address in $DeviceAddress)
+            {
+                try
                 {
-                    $Response.Content | ConvertFrom-Json | Add-YmResponseCode
-                }
-            }
-            catch
-            {
 
+                    $Response = Invoke-WebRequest -Uri "http://$Address/YamahaExtendedControl/v1/tuner/storePreset?num=$Number"
+                    if ($PassThru)
+                    {
+                        $Response.Content | ConvertFrom-Json | Add-YmResponseCode
+                    }
+                }
+                catch
+                {
+                    Write-Warning $PSItem
+                }
             }
         }
     }

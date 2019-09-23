@@ -31,7 +31,7 @@
 function Set-YmInput
 {
 
-    [cmdletbinding()]
+    [cmdletbinding(SupportsShouldProcess)]
     [Alias('input-ym')]
     param (
         [Parameter(Mandatory, ValueFromPipeline)]
@@ -78,20 +78,22 @@ function Set-YmInput
     process
     {
         $Input = $PSBoundParameters[$ParameterName]
-
-        foreach ($Address in $DeviceAddress)
+        if ($PSCmdlet.ShouldProcess($Input))
         {
-            try
+            foreach ($Address in $DeviceAddress)
             {
-                $Response = Invoke-WebRequest -Uri "http://$Address/YamahaExtendedControl/v1/main/setInput?input=$Input"
-                if ($PassThru)
+                try
                 {
-                    $Response.Content | ConvertFrom-Json | Add-YmResponseCode
+                    $Response = Invoke-WebRequest -Uri "http://$Address/YamahaExtendedControl/v1/main/setInput?input=$Input"
+                    if ($PassThru)
+                    {
+                        $Response.Content | ConvertFrom-Json | Add-YmResponseCode
+                    }
                 }
-            }
-            catch
-            {
-
+                catch
+                {
+                    Write-Warning $PSItem
+                }
             }
         }
     }

@@ -1,4 +1,4 @@
-# Default 
+# Default
 task . RemoveImport
 
 task tests InstallDependencies, Analyze, Test
@@ -27,7 +27,7 @@ task Analyze {
         Severity    = @('Error', 'Warning')
         Recurse     = $true
         Verbose     = $false
-        ExcludeRule = 'PSUseDeclaredVarsMoreThanAssignments'
+        ExcludeRule = 'PSUseDeclaredVarsMoreThanAssignments', 'PSUseSingularNouns'
     }
 
     $saResults = Invoke-ScriptAnalyzer @scriptAnalyzerParams
@@ -47,11 +47,11 @@ task Test {
         Verbose      = $false
         EnableExit   = $false
         OutputFormat = 'NUnitXml'
-        OutputFile   = "$BuildRoot\test\result.$ModuleName.test.xml" 
+        OutputFile   = "$BuildRoot\test\result.$ModuleName.test.xml"
     }
 
     # Publish Test Results as NUnitXml
-    $testResults = Invoke-Pester ".\$((($BuildFile -split '\\')[-1] -split '\.')[0] + '.Tests.ps1')" @invokePesterParams 
+    $testResults = Invoke-Pester ".\$((($BuildFile -split '\\')[-1] -split '\.')[0] + '.Tests.ps1')" @invokePesterParams
 
     $numberFails = $testResults.FailedCount
     assert($numberFails -eq 0) ('Failed "{0}" unit tests.' -f $numberFails)

@@ -31,7 +31,7 @@
 function Set-YmMuteOff
 {
 
-    [cmdletbinding()]
+    [cmdletbinding(SupportsShouldProcess)]
     [Alias('muteoff-ym')]
     param (
         [Parameter(Mandatory, ValueFromPipeline)]
@@ -45,20 +45,22 @@ function Set-YmMuteOff
     }
     process
     {
-        foreach ($Address in $DeviceAddress)
+        if ($PSCmdlet.ShouldProcess())
         {
-            try
+            foreach ($Address in $DeviceAddress)
             {
-
-                $Response = Invoke-WebRequest -Uri "http://$Address/YamahaExtendedControl/v1/main/setMute?enable=true"
-                if ($PassThru)
+                try
                 {
-                    $Response.Content | ConvertFrom-Json | Add-YmResponseCode
+                    $Response = Invoke-WebRequest -Uri "http://$Address/YamahaExtendedControl/v1/main/setMute?enable=true"
+                    if ($PassThru)
+                    {
+                        $Response.Content | ConvertFrom-Json | Add-YmResponseCode
+                    }
                 }
-            }
-            catch
-            {
-
+                catch
+                {
+                    Write-Warning $PSItem
+                }
             }
         }
     }

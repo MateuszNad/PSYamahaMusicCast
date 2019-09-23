@@ -1,21 +1,14 @@
 ﻿<?xml version="1.0" encoding="utf-8" standalone="no"?>
-<test-results xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="nunit_schema_2.5.xsd" name="Pester" total="1" errors="0" failures="1" not-run="0" inconclusive="0" ignored="0" skipped="0" invalid="0" date="2019-09-22" time="20:20:41">
+<test-results xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="nunit_schema_2.5.xsd" name="Pester" total="1" errors="0" failures="0" not-run="0" inconclusive="0" ignored="0" skipped="0" invalid="0" date="2019-09-23" time="20:34:11">
   <environment clr-version="4.0.30319.42000" user-domain="IT-MN-M" cwd="C:\Users\Lenovo\Documents\Projekty\12_PowerShell\15_Repositories\PSYamahaMusicCast" platform="Microsoft Windows 10 Pro|C:\WINDOWS|\Device\Harddisk0\Partition4" machine-name="IT-MN-M" nunit-version="2.5.8.0" os-version="10.0.18362" user="Lenovo" />
   <culture-info current-culture="pl-PL" current-uiculture="pl-PL" />
-  <test-suite type="TestFixture" name="Pester" executed="True" result="Failure" success="False" time="1.2677" asserts="0" description="Pester">
+  <test-suite type="TestFixture" name="Pester" executed="True" result="Success" success="True" time="0.5721" asserts="0" description="Pester">
     <results>
-      <test-suite type="TestFixture" name=".\PSYamahaMusicCast.Tests.ps1" executed="True" result="Failure" success="False" time="1.2677" asserts="0" description=".\PSYamahaMusicCast.Tests.ps1">
+      <test-suite type="TestFixture" name=".\PSYamahaMusicCast.Tests.ps1" executed="True" result="Success" success="True" time="0.5721" asserts="0" description=".\PSYamahaMusicCast.Tests.ps1">
         <results>
-          <test-suite type="TestFixture" name="Module Manifest Tests" executed="True" result="Failure" success="False" time="1.0871" asserts="0" description="Module Manifest Tests">
+          <test-suite type="TestFixture" name="Module Manifest Tests" executed="True" result="Success" success="True" time="0.465" asserts="0" description="Module Manifest Tests">
             <results>
-              <test-case description="Passes Test-ModuleManifest" name="Module Manifest Tests.Passes Test-ModuleManifest" time="0.1499" asserts="0" success="False" result="Failure" executed="True">
-                <failure>
-                  <message>The specified module 'C:\Users\Lenovo\Documents\Projekty\12_PowerShell\15_Repositories\PSYamahaMusicCast\PSNps.psd1' was not loaded because no valid module file was found in any module directory.</message>
-                  <stack-trace>at &lt;ScriptBlock&gt;, C:\Users\Lenovo\Documents\Projekty\12_PowerShell\15_Repositories\PSYamahaMusicCast\PSYamahaMusicCast.Tests.ps1: line 8
-8:         Test-ModuleManifest -Path $ModuleManifestPath | Should Not BeNullOrEmpty
-</stack-trace>
-                </failure>
-              </test-case>
+              <test-case description="Passes Test-ModuleManifest" name="Module Manifest Tests.Passes Test-ModuleManifest" time="0.3302" asserts="0" success="True" result="Success" executed="True" />
             </results>
           </test-suite>
         </results>

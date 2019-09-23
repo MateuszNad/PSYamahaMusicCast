@@ -37,7 +37,7 @@
 function Start-YmPlayback
 {
 
-    [cmdletbinding()]
+    [cmdletbinding(SupportsShouldProcess)]
     [Alias('play-ym')]
     param (
         [Parameter(Mandatory, ValueFromPipeline)]
@@ -50,20 +50,23 @@ function Start-YmPlayback
     }
     process
     {
-        foreach ($Address in $DeviceAddress)
+        if ($PSCmdlet.ShouldProcess())
         {
-            try
+            foreach ($Address in $DeviceAddress)
             {
-
-                $Response = Invoke-WebRequest -Uri "http://$Address/YamahaExtendedControl/v1/netusb/setPlayback?playback=play"
-                if ($PassThru)
+                try
                 {
-                    $Response.Content | ConvertFrom-Json | Add-YmResponseCode
-                }
-            }
-            catch
-            {
 
+                    $Response = Invoke-WebRequest -Uri "http://$Address/YamahaExtendedControl/v1/netusb/setPlayback?playback=play"
+                    if ($PassThru)
+                    {
+                        $Response.Content | ConvertFrom-Json | Add-YmResponseCode
+                    }
+                }
+                catch
+                {
+                    Write-Warning $PSItem
+                }
             }
         }
     }

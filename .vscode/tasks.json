@@ -33,6 +33,11 @@
             "label": "jira",
             "type": "shell",
             "command": "Invoke-Build -Task version"
+        },
+        {
+            "label": "Analyze",
+            "type": "shell",
+            "command": "Invoke-Build -Task Analyze"
         }
     ]
 }

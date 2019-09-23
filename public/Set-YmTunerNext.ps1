@@ -29,7 +29,7 @@
 function Set-YmTunerNext
 {
 
-    [cmdletbinding()]
+    [cmdletbinding(SupportsShouldProcess)]
     [Alias('tuner-next')]
     param (
         [Parameter(Mandatory, ValueFromPipeline)]
@@ -43,20 +43,23 @@ function Set-YmTunerNext
     }
     process
     {
-        foreach ($Address in $DeviceAddress)
+        if ($PSCmdlet.ShouldProcess())
         {
-            try
+            foreach ($Address in $DeviceAddress)
             {
-
-                $Response = Invoke-WebRequest -Uri "http://$Address/YamahaExtendedControl/v1/tuner/switchPreset?dir=next"
-                if ($PassThru)
+                try
                 {
-                    $Response.Content | ConvertFrom-Json | Add-YmResponseCode
-                }
-            }
-            catch
-            {
 
+                    $Response = Invoke-WebRequest -Uri "http://$Address/YamahaExtendedControl/v1/tuner/switchPreset?dir=next"
+                    if ($PassThru)
+                    {
+                        $Response.Content | ConvertFrom-Json | Add-YmResponseCode
+                    }
+                }
+                catch
+                {
+                    Write-Warning $PSItem
+                }
             }
         }
     }

@@ -23,7 +23,7 @@
 #>
 function Set-YmTunerFrequency
 {
-    [cmdletbinding()]
+    [cmdletbinding(SupportsShouldProcess)]
     [Alias('set-frequency')]
     param (
         [Parameter(Mandatory, ValueFromPipeline, Position = 0)]
@@ -40,25 +40,28 @@ function Set-YmTunerFrequency
     }
     process
     {
-        foreach ($Address in $DeviceAddress)
+        if ($PSCmdlet.ShouldProcess())
         {
-            try
+            foreach ($Address in $DeviceAddress)
             {
-                $Response = Invoke-WebRequest -Uri "http://$Address/YamahaExtendedControl/v1/tuner/setFreq?band=fm&tuning=direct&num=$Frequency"
-                $ResponseObj = $Response.Content | ConvertFrom-Json
-
-                if ($ResponseObj.response_code -eq 0)
+                try
                 {
-                    Get-YmStatus -DeviceAddress $DeviceAddress
-                }
-                else
-                {
-                    $ResponseObj | Add-YmResponseCode
-                }
-            }
-            catch
-            {
+                    $Response = Invoke-WebRequest -Uri "http://$Address/YamahaExtendedControl/v1/tuner/setFreq?band=fm&tuning=direct&num=$Frequency"
+                    $ResponseObj = $Response.Content | ConvertFrom-Json
 
+                    if ($ResponseObj.response_code -eq 0)
+                    {
+                        Get-YmStatus -DeviceAddress $DeviceAddress
+                    }
+                    else
+                    {
+                        $ResponseObj | Add-YmResponseCode
+                    }
+                }
+                catch
+                {
+                    Write-Warning $PSItem
+                }
             }
         }
     }

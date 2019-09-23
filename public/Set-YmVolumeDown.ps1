@@ -24,7 +24,7 @@
 function Set-YmVolumeDown
 {
     [Alias('down-ym')]
-    [cmdletbinding()]
+    [cmdletbinding(SupportsShouldProcess)]
     param (
         [Parameter(Mandatory, ValueFromPipeline)]
         [string[]]$DeviceAddress,
@@ -37,33 +37,36 @@ function Set-YmVolumeDown
     }
     process
     {
-        foreach ($Address in $DeviceAddress)
+        if ($PSCmdlet.ShouldProcess())
         {
-            try
+            foreach ($Address in $DeviceAddress)
             {
-                if ($InStep)
+                try
                 {
-                    $Response = Invoke-WebRequest -Uri "http://$Address/YamahaExtendedControl/v1/main/setVolume?volume=down&step=$InStep"
-                    $ResponseObj = $Response.Content | ConvertFrom-Json
-                }
-                else
-                {
-                    $Response = Invoke-WebRequest -Uri "http://$Address/YamahaExtendedControl/v1/main/setVolume?volume=down"
-                    $ResponseObj = $Response.Content | ConvertFrom-Json
-                }
+                    if ($InStep)
+                    {
+                        $Response = Invoke-WebRequest -Uri "http://$Address/YamahaExtendedControl/v1/main/setVolume?volume=down&step=$InStep"
+                        $ResponseObj = $Response.Content | ConvertFrom-Json
+                    }
+                    else
+                    {
+                        $Response = Invoke-WebRequest -Uri "http://$Address/YamahaExtendedControl/v1/main/setVolume?volume=down"
+                        $ResponseObj = $Response.Content | ConvertFrom-Json
+                    }
 
-                if ($ResponseObj.response_code -eq 0)
-                {
-                    Get-YmStatus -DeviceAddress $DeviceAddress | Select-Object volume
+                    if ($ResponseObj.response_code -eq 0)
+                    {
+                        Get-YmStatus -DeviceAddress $DeviceAddress | Select-Object volume
+                    }
+                    else
+                    {
+                        $ResponseObj | Add-YmResponseCode
+                    }
                 }
-                else
+                catch
                 {
-                    $ResponseObj | Add-YmResponseCode
+                    Write-Warning $PSItem
                 }
-            }
-            catch
-            {
-
             }
         }
     }

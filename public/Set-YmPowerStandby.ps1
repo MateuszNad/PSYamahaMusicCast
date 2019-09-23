@@ -33,7 +33,7 @@
 #>
 function Set-YmPowerStandby
 {
-    [cmdletbinding()]
+    [cmdletbinding(SupportsShouldProcess)]
     [Alias('standby-ym', 'Set-YmPowerOff', 'poweroff-ym')]
     param (
         [Parameter(Mandatory, ValueFromPipeline)]
@@ -47,20 +47,22 @@ function Set-YmPowerStandby
     }
     process
     {
-        foreach ($Address in $DeviceAddress)
+        if ($PSCmdlet.ShouldProcess())
         {
-            try
+            foreach ($Address in $DeviceAddress)
             {
-
-                $Response = Invoke-WebRequest -Uri "http://$Address/YamahaExtendedControl/v2/main/setPower?power=standby"
-                if ($PassThru)
+                try
                 {
-                    $Response.Content | ConvertFrom-Json | Add-YmResponseCode
+                    $Response = Invoke-WebRequest -Uri "http://$Address/YamahaExtendedControl/v2/main/setPower?power=standby"
+                    if ($PassThru)
+                    {
+                        $Response.Content | ConvertFrom-Json | Add-YmResponseCode
+                    }
                 }
-            }
-            catch
-            {
-
+                catch
+                {
+                    Write-Warning $PSItem
+                }
             }
         }
     }

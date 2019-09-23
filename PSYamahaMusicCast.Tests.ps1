@@ -1,6 +1,6 @@
 # Add test Author and Description
 
-$ModuleManifestName = 'PSNps.psd1'
+$ModuleManifestName = 'PSYamahaMusicCast.psd1'
 $ModuleManifestPath = "$PSScriptRoot\$ModuleManifestName"
 
 Describe 'Module Manifest Tests' {
