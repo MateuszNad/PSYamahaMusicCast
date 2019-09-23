@@ -65,7 +65,7 @@ task Clean {
 }
 
 task Publish {
-    Publish-Module -Path $BuildRoot -Repository SiSPsModulesRepo
+    Publish-Module -Path $BuildRoot -NuGetApiKey $env:NuGetApiKey
 }
 
 task UpdateVersion {

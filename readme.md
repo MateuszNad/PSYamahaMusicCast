@@ -1,9 +1,13 @@
 
 <p align="left">
+  <a href="https://www.powershellgallery.com/packages/PSYamahaMusicCast"><img src="https://img.shields.io/powershellgallery/v/PSYamahaMusicCast.svg"></a>
+  <a href="https://www.powershellgallery.com/packages/PSYamahaMusicCast"><img src="https://img.shields.io/powershellgallery/p/PSYamahaMusicCast.svg"></a>
   <a href="https://twitter.com/MateuszNadobnik"><img src="https://img.shields.io/twitter/follow/MateuszNadobnik.svg?label=Twitter%20%40MateuszNadobnik&style=social"></a>
   <a href="https://akademiapowershell.pl"><img src="https://img.shields.io/badge/Blog-AkademiaPowerShell-2A6496.svg"></a>
   <a href="https://www.linkedin.com/in/mnadobnik/"><img src="https://img.shields.io/badge/LinkedIn-mnadobnik-0077B5.svg?logo=LinkedIn"></a>
 </p>
+
+
 
 # PSYamahaMusicCast
 **PSYamahaMusicCast** is PowerShell module allows control the Yamaha devices which have got the [MusicCast](https://europe.yamaha.com/en/products/contents/audio_visual/musiccast/index.html) system.
