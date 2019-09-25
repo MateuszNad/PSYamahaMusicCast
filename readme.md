@@ -67,7 +67,7 @@ Add to your profile default value for parameter DeviceAddress. It will help you 
 $PSDefaultParameterValues.Add("*-Ym*:DeviceAddress", "10.10.0.30")
 ```
 
-## Examples use
+## Examples
 
 The command will turns on your device, set input to tuner and it volume up by one.
 
