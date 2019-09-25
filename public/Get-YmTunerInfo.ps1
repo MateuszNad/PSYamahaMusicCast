@@ -40,7 +40,6 @@ function Get-YmTunerInfo
         {
             try
             {
-
                 $Response = Invoke-WebRequest -Uri "http://$Address/YamahaExtendedControl/v1/tuner/getPlayInfo"
                 $Response.Content | ConvertFrom-Json
             }

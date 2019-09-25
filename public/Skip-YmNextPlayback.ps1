@@ -53,7 +53,6 @@ function Skip-YmNextPlayback
         {
             try
             {
-
                 $Response = Invoke-WebRequest -Uri "http://$Address/YamahaExtendedControl/v1/netusb/setPlayback?playback=next"
                 if ($PassThru)
                 {
