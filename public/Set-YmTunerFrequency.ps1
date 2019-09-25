@@ -40,7 +40,7 @@ function Set-YmTunerFrequency
     }
     process
     {
-        if ($PSCmdlet.ShouldProcess())
+        if ($PSCmdlet.ShouldProcess($DeviceAddress))
         {
             foreach ($Address in $DeviceAddress)
             {

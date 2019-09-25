@@ -42,7 +42,7 @@ function Set-YmTunerPrevious
     }
     process
     {
-        if ($PSCmdlet.ShouldProcess())
+        if ($PSCmdlet.ShouldProcess($DeviceAddress))
         {
             foreach ($Address in $DeviceAddress)
             {

@@ -53,7 +53,7 @@ function Set-YmSleepTimer
     }
     process
     {
-        if ($PSCmdlet.ShouldProcess())
+        if ($PSCmdlet.ShouldProcess($DeviceAddress))
         {
             foreach ($Address in $DeviceAddress)
             {

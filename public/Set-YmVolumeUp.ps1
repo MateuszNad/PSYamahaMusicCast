@@ -34,11 +34,10 @@ function Set-YmVolumeUp
     )
     begin
     {
-
     }
     process
     {
-        if ($PSCmdlet.ShouldProcess())
+        if ($PSCmdlet.ShouldProcess($DeviceAddress))
         {
             foreach ($Address in $DeviceAddress)
             {

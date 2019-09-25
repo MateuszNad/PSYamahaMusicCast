@@ -47,7 +47,7 @@ function Set-YmPowerStandby
     }
     process
     {
-        if ($PSCmdlet.ShouldProcess())
+        if ($PSCmdlet.ShouldProcess($DeviceAddress))
         {
             foreach ($Address in $DeviceAddress)
             {

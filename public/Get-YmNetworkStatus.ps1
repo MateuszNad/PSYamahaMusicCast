@@ -55,7 +55,6 @@ function Get-YmNetworkStatus
         {
             try
             {
-
                 $Response = Invoke-WebRequest -Uri "http://$Address/YamahaExtendedControl/v1/system/getNetworkStatus"
                 $Response.Content | ConvertFrom-Json | Add-YmResponseCode
             }

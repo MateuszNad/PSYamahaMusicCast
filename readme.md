@@ -66,3 +66,29 @@ Add to your profile default value for parameter DeviceAddress. It will help you 
 ```powershell
 $PSDefaultParameterValues.Add("*-Ym*:DeviceAddress", "10.10.0.30")
 ```
+
+## Examples use
+
+The command will turns on your device, set input to tuner and it volume up by one.
+
+```powershell
+Set-YmPowerOn -DeviceAddress 10.10.0.30
+Set-YmInput -DeviceAddress 10.10.0.30 -Input tuner
+Set-YmVolume  -DeviceAddress
+```
+
+or easier (when we add `PSDefaultParameterValues`)
+
+```powershell
+poweron-ym
+input-ym -Input tuner
+up-ym
+```
+
+The command will turns on your device, set input to Spotify and skip to next track.
+
+```powershell
+poweron-ym
+input-ym -Input spotify
+next-ym
+```
