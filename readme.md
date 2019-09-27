@@ -50,7 +50,7 @@
 Install-Module -Name PSYamahaMusicCast -Force
 ```
 
-Force aren't really nessecary but they do skip errors in case some appear.
+Force isn't really necessary but they do skip errors in case some appear.
 
 ## And to update
 
@@ -69,7 +69,7 @@ $PSDefaultParameterValues.Add("*-Ym*:DeviceAddress", "10.10.0.30")
 
 ## Examples
 
-The command will turn on your device, sets input to tuner and increases volume up by one.
+The command will turn on your device, sets the input to a tuner and increases volume up by one.
 
 ```powershell
 Set-YmPowerOn -DeviceAddress 10.10.0.30
@@ -85,7 +85,7 @@ input-ym -Input tuner
 up-ym
 ```
 
-The command will turn on your device, sets input to Spotify and skips to next track.
+The command will turn on your device, sets the input to Spotify and skips to next track.
 
 ```powershell
 poweron-ym
