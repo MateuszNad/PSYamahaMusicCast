@@ -41,7 +41,7 @@
 
 ## ChangeLog
 
-- 0.1.3.0 - 22.09.2019
+- 0.1.4.2 - 29.09.2019
   - Beta version
 
 ## To install
@@ -61,7 +61,7 @@ Update-Module -Name PSYamahaMusicCast
 Whenever there's new version you simply run the command and you can enjoy it. Remember, that you may need to close, reopen **PowerShell** session if you have already used module before updating it.
 
 ## Tip
-Add to your profile default value for parameter DeviceAddress. It will help you on easier use the functions of PSYamahaMusicCast.
+Add to your profile a default value for parameter DeviceAddress. It will help you on easier use the functions of PSYamahaMusicCast.
 
 ```powershell
 $PSDefaultParameterValues.Add("*-Ym*:DeviceAddress", "10.10.0.30")
@@ -69,7 +69,7 @@ $PSDefaultParameterValues.Add("*-Ym*:DeviceAddress", "10.10.0.30")
 
 ## Examples
 
-The command will turns on your device, set input to tuner and it volume up by one.
+The command will turn on your device, sets input to tuner and increases volume up by one.
 
 ```powershell
 Set-YmPowerOn -DeviceAddress 10.10.0.30
@@ -85,7 +85,7 @@ input-ym -Input tuner
 up-ym
 ```
 
-The command will turns on your device, set input to Spotify and skip to next track.
+The command will turn on your device, sets input to Spotify and skips to next track.
 
 ```powershell
 poweron-ym
