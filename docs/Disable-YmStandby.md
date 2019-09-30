@@ -1,15 +1,14 @@
 ---
-external help file: PSYamahaMusicCast-help.xml
-Module Name: PSYamahaMusicCast
-online version: Author: autor
-Link: akademiapowershell.pl
-
-Date: 26-08-2019
-Version: version
-eywords: keywords
-Notes:
 Changelog:
+Date: 26-08-2019
+external help file: PSYamahaMusicCast-help.xml
+eywords: keywords
+Link: akademiapowershell.pl
+Module Name: PSYamahaMusicCast
+Notes:
+online version: Author: autor
 schema: 2.0.0
+Version: version
 ---
 
 # Disable-YmStandby
