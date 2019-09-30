@@ -1,11 +1,26 @@
+param (
+    [Parameter(Mandatory = $false)]
+    [string]$ModuleName,
+    [Parameter(Mandatory = $false)]
+    [ValidateSet('Development', 'Production')]
+    $Configuration = 'Development'
+
+)
+
 # Default
 task . RemoveImport
 
 task tests InstallDependencies, Analyze, Test
-task publish InstallDependencies, Analyze, Test, Publish
 task version InstallDependencies, Analyze, Test, UpdateVersion
 
-$ModuleName = Split-Path -Path $BuildRoot -Leaf
+if (-not ($PSBoundParameters.ModuleName))
+{
+    $ModuleName = Split-Path -Path $BuildRoot -Leaf
+}
+
+task TestModuleName {
+    Write-Output $ModuleName
+}
 
 task RemoveImport {
     if (Get-Module $ModuleName)
@@ -15,10 +30,18 @@ task RemoveImport {
     Import-Module $BuildRoot
 }
 
+# Pre-requisites
 task InstallDependencies {
-    #Install-Module Pester -Force
-    Install-Module PSScriptAnalyzer -Force
-    #Install-Module dbatools -Force
+    Install-Module Pester -Force -Scope 'CurrentUser'
+    Install-Module PSScriptAnalyzer -Force -Scope 'CurrentUser'
+    Install-Module platyPs -Force -Scope 'CurrentUser'
+}
+
+#region Task to Update the PowerShell Module Help Files.
+task UpdateHelp {
+    Import-Module ".\$ModuleName" -Force
+    Update-MarkdownHelp .\docs
+    New-ExternalHelp -Path .\docs -OutputPath .\en-US -Force
 }
 
 task Analyze {
@@ -27,11 +50,11 @@ task Analyze {
         Severity    = @('Error', 'Warning')
         Recurse     = $true
         Verbose     = $false
-        ExcludeRule = 'PSUseDeclaredVarsMoreThanAssignments', 'PSUseSingularNouns'
+        ExcludeRule = 'PSUseDeclaredVarsMoreThanAssignments'
     }
 
     $saResults = Invoke-ScriptAnalyzer @scriptAnalyzerParams
-    $saResults | ConvertTo-Html | Out-File -FilePath "$BuildRoot\test\result.$ModuleName.scriptAnalyzer.html" -Force
+    # $saResults | ConvertTo-Html | Out-File -FilePath "$BuildRoot\tests\result.$ModuleName.scriptAnalyzer.html" -Force
 
     if ($saResults)
     {
@@ -47,7 +70,7 @@ task Test {
         Verbose      = $false
         EnableExit   = $false
         OutputFormat = 'NUnitXml'
-        OutputFile   = "$BuildRoot\test\result.$ModuleName.test.xml"
+        OutputFile   = "$BuildRoot\tests\result.$ModuleName.test.xml"
     }
 
     # Publish Test Results as NUnitXml
@@ -57,33 +80,75 @@ task Test {
     assert($numberFails -eq 0) ('Failed "{0}" unit tests.' -f $numberFails)
 }
 
+task CopyFiles {
+    # Copy Module Files to Output Folder
+    $OutputPath = ".\output\$ModuleName"
+    if (-not (Test-Path $OutputPath))
+    {
+        $null = New-Item -Path $OutputPath -ItemType Directory
+    }
+
+    '.\en-US\', '.\lib\' , '.\bin\' , '.\public\' , '.\private\' , '.\tests\' |
+        ForEach-Object {
+            if (Test-Path $_)
+            {
+                Copy-Item -Path $_ -Filter *.* -Recurse -Destination $OutputPath -Force
+            }
+        }
+
+    # Copy Module Manifest files
+    Copy-Item -Path @(
+        ".\README.md"
+        ".\$ModuleName.psd1"
+        ".\$ModuleName.psm1"
+        ".\$ModuleName.Format.ps1xml"
+    ) -Destination $OutputPath -Force
+}
+
+task UpdateVersion {
+    $manifestPath = ".\$ModuleName.psd1"
+
+    # Import PlatyPS.
+    Import-Module -Name PlatyPS
+
+    # Start by importing the manifest to determine the version, then add 1 to the Build
+    $manifest = Test-ModuleManifest -Path $manifestPath
+    [System.Version]$Version = $manifest.Version
+    [String]$NewVersion = New-Object -TypeName System.Version -ArgumentList ($version.Major, $version.Minor, ($version.Build + 1))
+    Write-Output -InputObject ('New Module version: {0}' -f $newVersion)
+
+    #Update Module with new version
+    Update-ModuleManifest -ModuleVersion $newVersion -Path $manifestPath -ReleaseNotes $ReleaseNotes
+}
+
 task Clean {
-    [array]$Files = "test\result.PSYamahaMusicCast.scriptAnalyzer.html", "test\result.PSYamahaMusicCast.test.xml", "remove", ".vscode"
-    $Files | ForEach-Object {
+    # Clean output folder
+    if ((Test-Path .\output))
+    {
+        Remove-Item -Path .\Output -Recurse -Force
+    }
+}
+
+task CleanTest {
+    [array]$Files = "test\result.PSNps.scriptAnalyzer.html", "test\result.PSNps.test.xml", "remove", ".vscode"
+    $Files | Foreach-Object {
         Remove-Item -Path (Join-Path -Path $BuildRoot -ChildPath $_) -Recurse -Force
     }
 }
 
-task Publish {
-    Publish-Module -Path $BuildRoot -NuGetApiKey $env:NuGetApiKey
-}
-
-task UpdateVersion {
+task Publish -If ($Configuration -eq 'Production') {
     try
     {
-        $moduleManifestFile = ((($BuildFile -split '\\')[-1] -split '\.')[0] + '.psd1')
-        $manifestContent = Get-Content $moduleManifestFile -Raw
-        [version]$version = [regex]::matches($manifestContent, "ModuleVersion\s*=\s*\'(?<version>(\d+\.)?(\d+\.)?(\d+\.)?(\*|\d+))'") | ForEach-Object { $_.groups['version'].value }
-        $newVersion = "{0}.{1}.{2}.{3}" -f $version.Major, $version.Minor, ($version.Build + 1), $version.Revision
-
-        $replacements = "ModuleVersion = '$newVersion'"
-        $manifestContent = $manifestContent -replace "ModuleVersion\s*=\s*\'(?<version>(\d+\.)?(\d+\.)?(\d+\.)?(\*|\d+))'", $replacements
-
-        $manifestContent | Set-Content -Path "$BuildRoot\$moduleManifestFile"
+        $params = @{
+            Path        = ('{0}\Output\{1}' -f $PSScriptRoot, $ModuleName )
+            NuGetApiKey = $Env:NuGetApiKey
+            ErrorAction = 'Stop'
+        }
+        Publish-Module @params
+        Write-Output "$ModuleName PowerShell Module version published to the PowerShell Gallery"
     }
     catch
     {
-        Write-Error -Message $_.Exception.Message
-        $host.SetShouldExit($LastExitCode)
+        throw $_
     }
 }

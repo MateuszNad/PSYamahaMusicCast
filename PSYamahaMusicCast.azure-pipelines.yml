@@ -1,7 +1,34 @@
-trigger
+# Docs: https://aka.ms/yaml
+name: $(Build.DefinitionName)_$(Date:yyyyMMdd))
+pr:
 - master
 
-stages:
-  - stage
+queue:
+  name: Hosted VS2017
 
-  - jobs:
+steps:
+- powershell: .\bootstrap.ps1
+  displayName: 'Install pre-requisites'
+
+- powershell: Invoke-Build -Task InstallDependencies
+  displayName: 'Install Dependencies'
+
+- powershell: Invoke-Build -Task UpdateHelp -ModuleName PSDevOpsModule
+  displayName: 'Update Help'
+
+- powershell: Invoke-Build -Task Analyze -ModuleName PSDevOpsModule
+  displayName: 'Analyze'
+
+- powershell: Invoke-Build -Task Test -ModuleName PSDevOpsModule
+  displayName: 'Test'
+
+- powershell: Invoke-Build -Task CopyFiles -ModuleName PSDevOpsModule
+  displayName: 'Copy Files'
+
+- powershell: Invoke-Build -Task Publish -ModuleName PSDevOpsModule
+  displayName: 'Publish PowerShell Module'
+  env:
+    NuGetApiKey: $(NugetAPIKey)
+
+- powershell: Invoke-Build -Task Clean -ModuleName PSDevOpsModule
+  displayName: 'Clean Files'
