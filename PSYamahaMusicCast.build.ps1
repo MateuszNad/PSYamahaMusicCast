@@ -50,7 +50,7 @@ task Analyze {
         Severity    = @('Error', 'Warning')
         Recurse     = $true
         Verbose     = $false
-        ExcludeRule = 'PSUseDeclaredVarsMoreThanAssignments'
+        ExcludeRule = 'PSUseDeclaredVarsMoreThanAssignments', 'PSUseSingularNouns'
     }
 
     $saResults = Invoke-ScriptAnalyzer @scriptAnalyzerParams
