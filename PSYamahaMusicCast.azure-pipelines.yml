@@ -13,22 +13,22 @@ steps:
 - powershell: Invoke-Build -Task InstallDependencies
   displayName: 'Install Dependencies'
 
-- powershell: Invoke-Build -Task UpdateHelp -ModuleName PSDevOpsModule
+- powershell: Invoke-Build -Task UpdateHelp -ModuleName PSYamahaMusicCast
   displayName: 'Update Help'
 
-- powershell: Invoke-Build -Task Analyze -ModuleName PSDevOpsModule
+- powershell: Invoke-Build -Task Analyze -ModuleName PSYamahaMusicCast
   displayName: 'Analyze'
 
-- powershell: Invoke-Build -Task Test -ModuleName PSDevOpsModule
+- powershell: Invoke-Build -Task Test -ModuleName PSYamahaMusicCast
   displayName: 'Test'
 
-- powershell: Invoke-Build -Task CopyFiles -ModuleName PSDevOpsModule
+- powershell: Invoke-Build -Task CopyFiles -ModuleName PSYamahaMusicCast
   displayName: 'Copy Files'
 
-- powershell: Invoke-Build -Task Publish -ModuleName PSDevOpsModule
+- powershell: Invoke-Build -Task Publish -ModuleName PSYamahaMusicCast
   displayName: 'Publish PowerShell Module'
   env:
     NuGetApiKey: $(NugetAPIKey)
 
-- powershell: Invoke-Build -Task Clean -ModuleName PSDevOpsModule
+- powershell: Invoke-Build -Task Clean -ModuleName PSYamahaMusicCast
   displayName: 'Clean Files'
