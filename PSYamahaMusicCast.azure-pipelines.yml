@@ -13,11 +13,11 @@ steps:
 - powershell: Invoke-Build -Task InstallDependencies
   displayName: 'Install Dependencies'
 
-- powershell: Invoke-Build -Task UpdateHelp -ModuleName PSYamahaMusicCast
-  displayName: 'Update Help'
+# - powershell: Invoke-Build -Task UpdateHelp -ModuleName PSYamahaMusicCast
+#  displayName: 'Update Help'
 
-# - powershell: Invoke-Build -Task Analyze -ModuleName PSYamahaMusicCast
-#  displayName: 'Analyze'
+- powershell: Invoke-Build -Task Analyze -ModuleName PSYamahaMusicCast
+  displayName: 'Analyze'
 
 - powershell: Invoke-Build -Task Test -ModuleName PSYamahaMusicCast
   displayName: 'Test'
