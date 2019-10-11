@@ -25,7 +25,7 @@ steps:
 - powershell: Invoke-Build -Task CopyFiles -ModuleName PSYamahaMusicCast
   displayName: 'Copy Files'
 
-- powershell: Invoke-Build -Task Publish -ModuleName PSYamahaMusicCast
+- powershell: Invoke-Build -Task Publish -ModuleName PSYamahaMusicCast -Configuration 'Production'
   displayName: 'Publish PowerShell Module'
   env:
     NuGetApiKey: $(NugetAPIKey)
