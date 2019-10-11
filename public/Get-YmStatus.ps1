@@ -57,7 +57,7 @@ function Get-YmStatus
             }
             catch
             {
-                Write-Warning "xxxx"
+                Write-Warning $PSItem
             }
         }
     }

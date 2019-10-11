@@ -20,6 +20,7 @@
 - Get-YmNetworkStatus
 - Get-YmSleepTimer
 - Get-YmStatus
+- Get-YmPlayingInfo
 - Get-YmTunerInfo
 - Set-YmInput
 - Set-YmMuteOff
@@ -41,6 +42,9 @@
 - Stop-YmSleepTimer
 
 ## ChangeLog
+
+- 0.1.5 - 11.10.2019
+  - New function - Get-YmPlayingInfo
 
 - 0.1.4.2 - 29.09.2019
   - Beta version
@@ -92,4 +96,26 @@ The command will turn on your device, sets the input to Spotify and skips to nex
 poweron-ym
 input-ym -Input spotify
 next-ym
+
+info-ym
+
+# response_code     : 0
+# input             : spotify
+# play_queue_type   : system
+# playback          : play
+# repeat            : off
+# shuffle           : off
+# play_time         : -60000
+# total_time        : 0
+# artist            : Alicia Keys
+# album             : The Element Of Freedom
+# track             : Empire State of Mind (Part II) Broken Down
+# albumart_url      : /YamahaRemoteControl/AlbumART/AlbumART9294.jpg
+# albumart_id       : 9294
+# usb_devicetype    : unknown
+# auto_stopped      : False
+# attribute         : 16777631
+# repeat_available  : {}
+# shuffle_available : {}
+# responde_message  : Successful request
 ```
