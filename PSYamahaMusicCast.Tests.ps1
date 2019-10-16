@@ -8,4 +8,12 @@ Describe 'Module Manifest Tests' {
         Test-ModuleManifest -Path $ModuleManifestPath | Should Not BeNullOrEmpty
         $? | Should Be $true
     }
+
+    It  'Passes Test-FunctionToExport' {
+        $ExportedCommands = (Test-ModuleManifest -Path $ModuleManifestPath).ExportedCommands.Values.Name
+        $BaseNameFunctionFile = (Get-ChildItem -Path "$PSScriptRoot\public").BaseName
+
+        $Result = $BaseNameFunctionFile | Where-Object { $ExportedCommands -notcontains $_ }
+        $Result.Count | Should Be 0
+    }
 }

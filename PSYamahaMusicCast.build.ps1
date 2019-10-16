@@ -30,6 +30,15 @@ task RemoveImport {
     Import-Module $BuildRoot
 }
 
+task CheckFunction {
+    $Manifest = Test-ModuleManifest -Path ".\$ModuleName.psd1"
+    $BaseName = (Get-ChildItem -Path  '.\public').BaseName
+
+
+    $BaseName | Where-Object { $Manifest.ExportedCommands.Values.Name -notcontains $_ }
+    ",'{0}'" -f (($BaseName | Where-Object { $Manifest.ExportedCommands.Values.Name -notcontains $_ }) -join "','") | Clip
+}
+
 # Pre-requisites
 task InstallDependencies {
     Install-Module Pester -Force -Scope 'CurrentUser'
