@@ -13,14 +13,14 @@
 # PSYamahaMusicCast
 **PSYamahaMusicCast** is PowerShell module allows control the Yamaha devices which have got the [MusicCast](https://europe.yamaha.com/en/products/contents/audio_visual/musiccast/index.html) system.
 
-**PSYamahaMusicCast** now has 25 functions:
+**PSYamahaMusicCast** now has 26 functions:
 - Disable-YmStandby
 - Enable-YmStandby
 - Get-YmDeviceInformation
 - Get-YmNetworkStatus
+- Get-YmPlayingInfo
 - Get-YmSleepTimer
 - Get-YmStatus
-- Get-YmPlayingInfo
 - Get-YmTunerInfo
 - Set-YmInput
 - Set-YmMuteOff
@@ -42,6 +42,9 @@
 - Stop-YmSleepTimer
 
 ## ChangeLog
+
+- 0.1.7 - 19.10.2019
+  - Added notifications (balloon tip) on Windows (beta)
 
 - 0.1.5 - 11.10.2019
   - New function - Get-YmPlayingInfo

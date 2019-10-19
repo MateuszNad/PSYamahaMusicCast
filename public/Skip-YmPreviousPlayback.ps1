@@ -59,6 +59,8 @@ function Skip-YmPreviousPlayback
                 {
                     $Response.Content | ConvertFrom-Json | Add-YmResponseCode
                 }
+
+                Get-YmPlayingInfo -DeviceAddress $Address | Send-YmNotification
             }
             catch
             {
