@@ -39,7 +39,7 @@ function Get-YmStatus
     [cmdletbinding()]
     [Alias('status-ym')]
     param (
-        [Parameter(Mandatory, ValueFromPipeline)]
+        [Parameter(Mandatory, ValueFromPipeline, Position = 0)]
         [string[]]$DeviceAddress
     )
     begin

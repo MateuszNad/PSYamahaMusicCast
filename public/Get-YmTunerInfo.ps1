@@ -27,7 +27,7 @@ function Get-YmTunerInfo
     [cmdletbinding()]
     [Alias('tuner-ym')]
     param (
-        [Parameter(Mandatory, ValueFromPipeline)]
+        [Parameter(Mandatory, ValueFromPipeline, Position = 0)]
         [string[]]$DeviceAddress
     )
     begin

@@ -10,7 +10,7 @@
     Enable-YmStandby -DeviceAddress '10.10.0.1'
 
 .EXAMPLE
-    przyklad_2
+    Enable-YmStandby '10.10.0.1'
 
 .LINK
     Author: autor
@@ -28,7 +28,7 @@ function Enable-YmStandby
     [cmdletbinding()]
     [Alias()]
     param (
-        [Parameter(Mandatory, ValueFromPipeline)]
+        [Parameter(Mandatory, ValueFromPipeline, Position = 0)]
         [string[]]$DeviceAddress,
         [switch]$PassThru
     )

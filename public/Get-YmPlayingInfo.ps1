@@ -46,7 +46,7 @@ function Get-YmPlayingInfo
     [cmdletbinding()]
     [Alias('info-ym')]
     param (
-        [Parameter(Mandatory, ValueFromPipeline)]
+        [Parameter(Mandatory, ValueFromPipeline, Position = 0)]
         [string[]]$DeviceAddress
     )
     begin

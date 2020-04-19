@@ -33,7 +33,7 @@ function Set-YmPowerOn
     [cmdletbinding(SupportsShouldProcess)]
     [Alias('poweron-ym')]
     param (
-        [Parameter(Mandatory, ValueFromPipeline)]
+        [Parameter(Mandatory, ValueFromPipeline, Position = 0)]
         [string[]]$DeviceAddress,
         [switch]$PassThru
 

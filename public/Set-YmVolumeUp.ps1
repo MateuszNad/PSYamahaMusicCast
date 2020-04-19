@@ -26,9 +26,9 @@ function Set-YmVolumeUp
     [cmdletbinding(SupportsShouldProcess)]
     [Alias('up-ym')]
     param (
-        [Parameter(Mandatory, ValueFromPipeline)]
+        [Parameter(Mandatory, ValueFromPipeline, Position = 0)]
         [string[]]$DeviceAddress,
-        [Parameter(Mandatory = $false, ParameterSetName = 'InStep')]
+        [Parameter(Mandatory = $false, ParameterSetName = 'InStep', Position = 1)]
         [int]$InStep,
         [switch]$PassThru
     )

@@ -31,7 +31,7 @@ function Set-YmTunerPrevious
     [cmdletbinding(SupportsShouldProcess)]
     [Alias('tuner-previous')]
     param (
-        [Parameter(Mandatory, ValueFromPipeline)]
+        [Parameter(Mandatory, ValueFromPipeline, Position = 0)]
         [string[]]$DeviceAddress,
         [switch]$PassThru
 

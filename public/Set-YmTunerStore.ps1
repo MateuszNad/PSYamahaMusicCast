@@ -27,7 +27,7 @@ function Set-YmTunerStore
     [cmdletbinding(SupportsShouldProcess)]
     [Alias()]
     param (
-        [Parameter(Mandatory, ValueFromPipeline)]
+        [Parameter(Mandatory, ValueFromPipeline, Position = 0)]
         [string[]]$DeviceAddress,
         [Parameter(Mandatory)]
         [int]$Number,

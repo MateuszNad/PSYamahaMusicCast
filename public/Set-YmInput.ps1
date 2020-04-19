@@ -34,7 +34,7 @@ function Set-YmInput
     [cmdletbinding(SupportsShouldProcess)]
     [Alias('input-ym')]
     param (
-        [Parameter(Mandatory, ValueFromPipeline)]
+        [Parameter(Mandatory, ValueFromPipeline, Position = 0)]
         [string]$DeviceAddress,
         [switch]$PassThru
     )

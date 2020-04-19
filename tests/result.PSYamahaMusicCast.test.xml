@@ -1,14 +1,15 @@
 ﻿<?xml version="1.0" encoding="utf-8" standalone="no"?>
-<test-results xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="nunit_schema_2.5.xsd" name="Pester" total="1" errors="0" failures="0" not-run="0" inconclusive="0" ignored="0" skipped="0" invalid="0" date="2019-09-25" time="10:29:04">
-  <environment clr-version="4.0.30319.42000" user-domain="IT-MN-M" cwd="C:\Users\Lenovo\Documents\Projekty\12_PowerShell\15_Repositories\PSYamahaMusicCast" platform="Microsoft Windows 10 Pro|C:\WINDOWS|\Device\Harddisk0\Partition4" machine-name="IT-MN-M" nunit-version="2.5.8.0" os-version="10.0.18362" user="Lenovo" />
+<test-results xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="nunit_schema_2.5.xsd" name="Pester" total="2" errors="0" failures="0" not-run="0" inconclusive="0" ignored="0" skipped="0" invalid="0" date="2020-04-19" time="09:38:11">
+  <environment platform="Microsoft Windows 10 Pro|C:\WINDOWS|\Device\Harddisk0\Partition4" os-version="10.0.18362" machine-name="IT-MN-M" cwd="C:\Users\Lenovo\Documents\Projekty\12_PowerShell\15_Repositories\PSYamahaMusicCast" user-domain="IT-MN-M" nunit-version="2.5.8.0" clr-version="Unknown" user="Lenovo" />
   <culture-info current-culture="pl-PL" current-uiculture="pl-PL" />
-  <test-suite type="TestFixture" name="Pester" executed="True" result="Success" success="True" time="0.2088" asserts="0" description="Pester">
+  <test-suite type="TestFixture" name="Pester" executed="True" result="Success" success="True" time="1.8869" asserts="0" description="Pester">
     <results>
-      <test-suite type="TestFixture" name=".\PSYamahaMusicCast.Tests.ps1" executed="True" result="Success" success="True" time="0.2088" asserts="0" description=".\PSYamahaMusicCast.Tests.ps1">
+      <test-suite type="TestFixture" name=".\PSYamahaMusicCast.Tests.ps1" executed="True" result="Success" success="True" time="1.8869" asserts="0" description=".\PSYamahaMusicCast.Tests.ps1">
         <results>
-          <test-suite type="TestFixture" name="Module Manifest Tests" executed="True" result="Success" success="True" time="0.1584" asserts="0" description="Module Manifest Tests">
+          <test-suite type="TestFixture" name="Module Manifest Tests" executed="True" result="Success" success="True" time="1.7098" asserts="0" description="Module Manifest Tests">
             <results>
-              <test-case description="Passes Test-ModuleManifest" name="Module Manifest Tests.Passes Test-ModuleManifest" time="0.0271" asserts="0" success="True" result="Success" executed="True" />
+              <test-case description="Passes Test-ModuleManifest" name="Module Manifest Tests.Passes Test-ModuleManifest" time="0.8707" asserts="0" success="True" result="Success" executed="True" />
+              <test-case description="Passes Test-FunctionToExport" name="Module Manifest Tests.Passes Test-FunctionToExport" time="0.3196" asserts="0" success="True" result="Success" executed="True" />
             </results>
           </test-suite>
         </results>

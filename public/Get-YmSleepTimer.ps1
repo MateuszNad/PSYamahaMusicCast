@@ -26,7 +26,7 @@ function Get-YmSleepTimer
 {
     [cmdletbinding()]
     param (
-        [Parameter(Mandatory, ValueFromPipeline)]
+        [Parameter(Mandatory, ValueFromPipeline, Position = 0)]
         [string[]]$DeviceAddress
     )
 

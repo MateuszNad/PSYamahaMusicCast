@@ -41,9 +41,9 @@ function Set-YmSleepTimer
     [cmdletbinding(SupportsShouldProcess)]
     [Alias('timer-ym')]
     param (
-        [Parameter(Mandatory, ValueFromPipeline)]
+        [Parameter(Mandatory, ValueFromPipeline, Position = 0)]
         [string[]]$DeviceAddress,
-        [Parameter(Mandatory = $false)]
+        [Parameter(Mandatory = $false, Position = 1)]
         [int]$Minute = 30,
         [switch]$PassThru
     )

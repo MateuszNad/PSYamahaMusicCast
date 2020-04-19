@@ -22,7 +22,7 @@ function Stop-YmSleepTimer
 {
     [cmdletbinding(SupportsShouldProcess)]
     param (
-        [Parameter(Mandatory, ValueFromPipeline)]
+        [Parameter(Mandatory, ValueFromPipeline, Position = 0)]
         [string[]]$DeviceAddress
     )
     if ($PSCmdlet.ShouldProcess($DeviceAddress))

@@ -9,6 +9,10 @@
     Set-YmVolume -DeviceAddress 10.10.0.30
 
 .EXAMPLE
+    Set-YmVolume 10.10.0.30
+
+
+.EXAMPLE
     volume-ym -DeviceAddress 10.10.0.30
 
 .LINK
@@ -26,9 +30,9 @@ function Set-YmVolume
     [cmdletbinding(SupportsShouldProcess)]
     [Alias('volume-ym')]
     param (
-        [Parameter(Mandatory, ValueFromPipeline)]
+        [Parameter(Mandatory, ValueFromPipeline, Position = 0)]
         [string[]]$DeviceAddress,
-        [Parameter(Mandatory)]
+        [Parameter(Mandatory, Position = 1)]
         [ValidateRange(0, 100)]
         [int]$Volume
     )

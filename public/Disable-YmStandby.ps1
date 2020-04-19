@@ -10,7 +10,7 @@
 
     The function
 .EXAMPLE
-    przyklad_2
+    Disable-YmStandby '10.10.0.1'
 
 .LINK
     Author: autor
@@ -27,7 +27,7 @@ function Disable-YmStandby
 
     [cmdletbinding()]
     param (
-        [Parameter(Mandatory, ValueFromPipeline)]
+        [Parameter(Mandatory, ValueFromPipeline, Position = 0)]
         [string[]]$DeviceAddress,
         [switch]$PassThru
 

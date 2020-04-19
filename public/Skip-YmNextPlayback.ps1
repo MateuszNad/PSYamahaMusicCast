@@ -39,7 +39,7 @@ function Skip-YmNextPlayback
     [cmdletbinding()]
     [Alias('next-ym')]
     param (
-        [Parameter(Mandatory, ValueFromPipeline)]
+        [Parameter(Mandatory, ValueFromPipeline, Position = 0)]
         [string[]]$DeviceAddress,
         [switch]$PassThru
     )
